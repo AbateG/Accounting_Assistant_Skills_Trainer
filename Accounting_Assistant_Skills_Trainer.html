@@ -1,0 +1,2601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accounting Assistant Skills Trainer | AGOSFL Interview Prep</title>
+<style>
+  :root {
+    --primary: #0f4c81;
+    --primary-dark: #0a3559;
+    --accent: #00a86b;
+    --accent-light: #e6f7f0;
+    --warning: #e67e22;
+    --danger: #c0392b;
+    --bg: #f4f7fb;
+    --card: #ffffff;
+    --text: #1a2b3c;
+    --muted: #5a6a7a;
+    --border: #d8e2ec;
+    --success: #27ae60;
+    --shadow: 0 4px 20px rgba(15,76,129,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+  .logo-icon {
+    width: 36px; height: 36px;
+    background: white;
+    color: var(--primary);
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+  }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .lang-toggle {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .lang-toggle:hover { background: rgba(255,255,255,0.25); }
+  .progress-pill {
+    background: rgba(255,255,255,0.2);
+    padding: 0.3rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  /* Layout */
+  .app {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: calc(100vh - 64px);
+  }
+  nav {
+    background: var(--card);
+    border-right: 1px solid var(--border);
+    padding: 1.25rem 0.75rem;
+    overflow-y: auto;
+  }
+  .nav-section {
+    margin-bottom: 1.5rem;
+  }
+  .nav-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    padding: 0 0.75rem;
+    margin-bottom: 0.4rem;
+    font-weight: 700;
+  }
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.92rem;
+    color: var(--text);
+    text-align: left;
+    transition: all 0.15s;
+    margin-bottom: 2px;
+  }
+  .nav-btn:hover { background: #eef3f9; }
+  .nav-btn.active {
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+  }
+  .nav-btn .icon { font-size: 1.1rem; width: 22px; text-align: center; }
+  .badge {
+    margin-left: auto;
+    background: var(--accent);
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: 10px;
+    font-weight: 700;
+  }
+  .nav-btn.active .badge { background: white; color: var(--primary); }
+
+  main {
+    padding: 1.5rem 2rem;
+    overflow-y: auto;
+    max-height: calc(100vh - 64px);
+  }
+
+  /* Cards & Panels */
+  .panel { display: none; }
+  .panel.active { display: block; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  .hero {
+    background: linear-gradient(135deg, #e8f4fd 0%, #f0f9f4 100%);
+    border-radius: 16px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #c5dff0;
+  }
+  .hero h1 { font-size: 1.6rem; color: var(--primary); margin-bottom: 0.4rem; }
+  .hero p { color: var(--muted); max-width: 640px; }
+
+  .card {
+    background: var(--card);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .card h2 {
+    font-size: 1.15rem;
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .card h3 { font-size: 1rem; margin: 1rem 0 0.5rem; color: var(--primary-dark); }
+
+  /* Exercise UI */
+  .exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .difficulty {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    text-transform: uppercase;
+  }
+  .diff-easy { background: #d4edda; color: #155724; }
+  .diff-medium { background: #fff3cd; color: #856404; }
+  .diff-hard { background: #f8d7da; color: #721c24; }
+
+  .instructions {
+    background: #f8fafc;
+    border-left: 4px solid var(--primary);
+    padding: 0.9rem 1.1rem;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 1.25rem;
+    font-size: 0.95rem;
+  }
+  .instructions ol { margin-left: 1.2rem; margin-top: 0.4rem; }
+  .instructions li { margin-bottom: 0.3rem; }
+
+  /* Spreadsheet simulation */
+  .sheet-container {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  table.sheet {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    background: white;
+  }
+  table.sheet th {
+    background: #e8f0f8;
+    color: var(--primary-dark);
+    font-weight: 700;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid #c5d5e5;
+    text-align: left;
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+  }
+  table.sheet td {
+    padding: 0.35rem 0.5rem;
+    border: 1px solid #e0e8f0;
+    min-width: 90px;
+  }
+  table.sheet td input, table.sheet td select {
+    width: 100%;
+    border: 1px solid transparent;
+    background: transparent;
+    padding: 0.25rem 0.3rem;
+    font-size: 0.88rem;
+    font-family: inherit;
+    border-radius: 3px;
+  }
+  table.sheet td input:focus, table.sheet td select:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: #f0f7ff;
+  }
+  table.sheet tr:hover td { background: #f7fafc; }
+  .cell-overdue { background: #fdecea !important; color: #c0392b; font-weight: 600; }
+  .cell-pending { background: #fff8e6; }
+  .cell-done { background: #e8f8ef; }
+
+  /* Buttons */
+  .btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1rem 0;
+  }
+  .btn {
+    padding: 0.55rem 1.1rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .btn-primary { background: var(--primary); color: white; }
+  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-accent { background: var(--accent); color: white; }
+  .btn-accent:hover { background: #008f5a; }
+  .btn-outline {
+    background: white;
+    border: 1.5px solid var(--border);
+    color: var(--text);
+  }
+  .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+  .btn-success { background: var(--success); color: white; }
+  .btn-warning { background: var(--warning); color: white; }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* Feedback */
+  .feedback {
+    padding: 0.9rem 1.1rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-weight: 500;
+    display: none;
+  }
+  .feedback.show { display: block; }
+  .feedback.success { background: #e8f8ef; color: #1e7e34; border: 1px solid #a3e4b8; }
+  .feedback.error { background: #fdecea; color: #c0392b; border: 1px solid #f5c6cb; }
+  .feedback.info { background: #e8f4fd; color: #0c5460; border: 1px solid #bee5eb; }
+
+  /* Calendar mock */
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 1rem;
+  }
+  .cal-day-header {
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--muted);
+    padding: 0.4rem;
+  }
+  .cal-day {
+    min-height: 72px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.3rem;
+    font-size: 0.8rem;
+    position: relative;
+  }
+  .cal-day.other { background: #f8fafc; color: #aaa; }
+  .cal-day.today { border-color: var(--primary); border-width: 2px; }
+  .cal-day .day-num { font-weight: 700; margin-bottom: 2px; }
+  .cal-event {
+    background: var(--primary);
+    color: white;
+    font-size: 0.68rem;
+    padding: 1px 4px;
+    border-radius: 3px;
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+  }
+  .cal-event.client { background: var(--accent); }
+  .cal-event.internal { background: #7c6bc4; }
+  .cal-event.deadline { background: var(--danger); }
+
+  /* Form for calendar */
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 0.25rem; }
+  .form-group.full { grid-column: 1 / -1; }
+  label { font-size: 0.82rem; font-weight: 600; color: var(--muted); }
+  input[type="text"], input[type="date"], input[type="time"], select, textarea {
+    padding: 0.5rem 0.7rem;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-family: inherit;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(15,76,129,0.12);
+  }
+
+  /* Progress & Stats */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .stat-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .stat-value { font-size: 1.8rem; font-weight: 800; color: var(--primary); }
+  .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+
+  .progress-bar-bg {
+    height: 10px;
+    background: #e0e8f0;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 0.75rem 0;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #2ecc71);
+    border-radius: 5px;
+    transition: width 0.4s ease;
+  }
+
+  /* Tips */
+  .tip-box {
+    background: #fffbeb;
+    border: 1px solid #fcd34d;
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1rem;
+  }
+  .tip-box strong { color: #92400e; }
+
+  /* Motivational */
+  .motivation {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #0f4c81, #00a86b);
+    color: white;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+  }
+  .motivation h3 { font-size: 1.3rem; margin-bottom: 0.4rem; }
+  .motivation p { opacity: 0.9; }
+
+  /* Checklist */
+  .checklist { list-style: none; }
+  .checklist li {
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-box {
+    width: 20px; height: 20px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .check-box.done {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: white;
+  }
+
+  /* Timer */
+  .timer {
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1.1rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 860px) {
+    .app { grid-template-columns: 1fr; }
+    nav {
+      display: flex;
+      overflow-x: auto;
+      padding: 0.5rem;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-section { display: flex; gap: 0.3rem; margin: 0; }
+    .nav-title { display: none; }
+    .nav-btn { white-space: nowrap; padding: 0.5rem 0.8rem; }
+    main { padding: 1rem; }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+
+  /* Utility */
+  .hidden { display: none !important; }
+  .text-muted { color: var(--muted); }
+  .mt-1 { margin-top: 0.5rem; }
+  .mb-1 { margin-bottom: 0.5rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">A</div>
+    <span>Accounting Assistant Skills Trainer</span>
+  </div>
+  <div class="header-right">
+    <button class="lang-toggle" id="langToggle" onclick="toggleLang()">ES / EN</button>
+    <div class="progress-pill" id="overallProgress">0% Complete</div>
+  </div>
+</header>
+
+<div class="app">
+  <nav id="sidebar">
+    <div class="nav-section">
+      <div class="nav-title" data-i18n="nav_start">Start</div>
+      <button class="nav-btn active" data-panel="dashboard" onclick="showPanel('dashboard')">
+        <span class="icon">🏠</span> <span data-i18n="nav_dashboard">Dashboard</span>
+      </button>
+    </div>
+    <div class="nav-section">
+      <div class="nav-title" data-i18n="nav_sheets">Spreadsheets</div>
+      <button class="nav-btn" data-panel="lab" onclick="showPanel('lab')">
+        <span class="icon">🧪</span> <span>Live Formula Lab</span>
+        <span class="badge" style="background:#7c6bc4">NEW</span>
+      </button>
+      <button class="nav-btn" data-panel="ex1" onclick="showPanel('ex1')">
+        <span class="icon">📋</span> <span data-i18n="nav_ex1">Client Document Tracker</span>
+        <span class="badge" id="badge-ex1">1</span>
+      </button>
+      <button class="nav-btn" data-panel="ex2" onclick="showPanel('ex2')">
+        <span class="icon">💰</span> <span data-i18n="nav_ex2">Invoice & Payments</span>
+        <span class="badge" id="badge-ex2">2</span>
+      </button>
+      <button class="nav-btn" data-panel="ex3" onclick="showPanel('ex3')">
+        <span class="icon">🔍</span> <span data-i18n="nav_ex3">Lookup & Matching</span>
+        <span class="badge" id="badge-ex3">3</span>
+      </button>
+      <button class="nav-btn" data-panel="ex4" onclick="showPanel('ex4')">
+        <span class="icon">🧹</span> <span data-i18n="nav_ex4">Data Cleaning</span>
+        <span class="badge" id="badge-ex4">4</span>
+      </button>
+      <button class="nav-btn" data-panel="ex5" onclick="showPanel('ex5')">
+        <span class="icon">📊</span> <span data-i18n="nav_ex5">Status Dashboard</span>
+        <span class="badge" id="badge-ex5">5</span>
+      </button>
+    </div>
+    <div class="nav-section">
+      <div class="nav-title" data-i18n="nav_calendar">Calendar</div>
+      <button class="nav-btn" data-panel="cal1" onclick="showPanel('cal1')">
+        <span class="icon">📅</span> <span data-i18n="nav_cal1">Create Appointment</span>
+        <span class="badge" id="badge-cal1">6</span>
+      </button>
+      <button class="nav-btn" data-panel="cal2" onclick="showPanel('cal2')">
+        <span class="icon">🔄</span> <span data-i18n="nav_cal2">Reschedule & Reminders</span>
+        <span class="badge" id="badge-cal2">7</span>
+      </button>
+    </div>
+    <div class="nav-section">
+      <div class="nav-title" data-i18n="nav_acct">Accounting Basics</div>
+      <button class="nav-btn" data-panel="acct1" onclick="showPanel('acct1')">
+        <span class="icon">📄</span> <span data-i18n="nav_acct1">Key Tax Documents</span>
+        <span class="badge" id="badge-acct1">8</span>
+      </button>
+      <button class="nav-btn" data-panel="acct2" onclick="showPanel('acct2')">
+        <span class="icon">🗓️</span> <span data-i18n="nav_acct2">Deadlines & Calendar</span>
+        <span class="badge" id="badge-acct2">9</span>
+      </button>
+      <button class="nav-btn" data-panel="acct3" onclick="showPanel('acct3')">
+        <span class="icon">🔄</span> <span data-i18n="nav_acct3">Client Onboarding Flow</span>
+        <span class="badge" id="badge-acct3">10</span>
+      </button>
+      <button class="nav-btn" data-panel="acct4" onclick="showPanel('acct4')">
+        <span class="icon">💬</span> <span data-i18n="nav_acct4">Scenarios & Responses</span>
+        <span class="badge" id="badge-acct4">11</span>
+      </button>
+      <button class="nav-btn" data-panel="acct5" onclick="showPanel('acct5')">
+        <span class="icon">📚</span> <span data-i18n="nav_acct5">Core Terms Quiz</span>
+        <span class="badge" id="badge-acct5">12</span>
+      </button>
+    </div>
+    <div class="nav-section">
+      <div class="nav-title" data-i18n="nav_more">More</div>
+      <button class="nav-btn" data-panel="mixed" onclick="showPanel('mixed')">
+        <span class="icon">⚡</span> <span data-i18n="nav_mixed">Mixed Challenge</span>
+      </button>
+      <button class="nav-btn" data-panel="tips" onclick="showPanel('tips')">
+        <span class="icon">💡</span> <span data-i18n="nav_tips">Interview Tips</span>
+      </button>
+      <button class="nav-btn" data-panel="progress" onclick="showPanel('progress')">
+        <span class="icon">🏆</span> <span data-i18n="nav_progress">My Progress</span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+    <!-- DASHBOARD -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="hero">
+        <h1 data-i18n="hero_title">Master the Skills Check</h1>
+        <p data-i18n="hero_sub">Practice the exact Google Sheets / Excel and Calendar tasks most likely to appear in the Accounting Group of South Florida screening interview. Train until every action feels natural.</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-value" id="statCompleted">0</div>
+          <div class="stat-label" data-i18n="stat_completed">Exercises Done</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statScore">—</div>
+          <div class="stat-label" data-i18n="stat_score">Avg. Score</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statTime">0m</div>
+          <div class="stat-label" data-i18n="stat_time">Practice Time</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statStreak">0</div>
+          <div class="stat-label" data-i18n="stat_streak">Day Streak</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🎯 <span data-i18n="ready_title">Interview Readiness Checklist</span></h2>
+        <ul class="checklist" id="readinessList">
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> <span data-i18n="check1">I can sort and filter a client document list in under 60 seconds</span></li>
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> <span data-i18n="check2">I can write a simple IF or COUNTIF formula without hesitation</span></li>
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> <span data-i18n="check3">I can use VLOOKUP / XLOOKUP or INDEX-MATCH for matching data</span></li>
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> <span data-i18n="check4">I can clean messy data (TRIM, proper case, dates)</span></li>
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> <span data-i18n="check5">I can create a client appointment with title, time, reminder and notes</span></li>
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> <span data-i18n="check6">I can reschedule an event and update attendees/description</span></li>
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> <span data-i18n="check7">I can narrate what I am doing clearly in English and Spanish</span></li>
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> <span>I can correctly identify W-2, 1099, K-1, Organizer and Engagement Letter</span></li>
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> <span>I know the main individual tax deadline (April 15) and that an extension does not extend payment time</span></li>
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> <span>I can describe the logical client onboarding sequence used in a small tax firm</span></li>
+          <li><div class="check-box" onclick="toggleCheck(this)"></div> <span>I know how to respond professionally to IRS letters, missing documents, and questions outside my role</span></li>
+        </ul>
+      </div>
+
+      <div class="motivation">
+        <h3 data-i18n="mot_title">You are preparing for a real opportunity</h3>
+        <p data-i18n="mot_text">This is an entry-level role with training. Showing calm, accurate, organized work on the tools they already use is the strongest signal you can give. Practice here until it feels easy.</p>
+      </div>
+
+      <div class="card">
+        <h2>🚀 <span data-i18n="start_here">Recommended Path</span></h2>
+        <p class="text-muted mb-1" data-i18n="path_desc">Complete the exercises in order. Each one builds the exact habits the interview will test.</p>
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="showPanel('ex1')">Start with Client Tracker →</button>
+          <button class="btn btn-outline" onclick="showPanel('tips')">View Interview Tips</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE FORMULA LAB – High fidelity spreadsheet simulator -->
+    <div class="panel" id="panel-lab">
+      <div class="exercise-header">
+        <div>
+          <h2>🧪 Live Formula Lab – Real Spreadsheet Simulator</h2>
+          <span class="difficulty diff-medium">Practice real formulas like in Google Sheets / Excel</span>
+        </div>
+      </div>
+
+      <div class="instructions">
+        <strong>How to use:</strong>
+        <ol>
+          <li>Click any cell to select it. The formula bar at the top shows the content.</li>
+          <li>Type a formula starting with <code>=</code> (examples below) and press Enter.</li>
+          <li>Supported functions: <code>IF</code>, <code>SUM</code>, <code>SUMIF</code>, <code>COUNTIF</code>, <code>TODAY</code>, <code>TRIM</code>, <code>PROPER</code>, <code>UPPER</code>, <code>LOWER</code>, <code>LEFT</code>, <code>RIGHT</code>, <code>LEN</code>, basic math (+ − * /), and cell references (A1, B2…).</li>
+          <li>Choose a practice scenario below to load realistic client data, then solve it with real formulas.</li>
+        </ol>
+      </div>
+
+      <div class="btn-row" style="margin-bottom:1rem;">
+        <button class="btn btn-primary" onclick="loadLabScenario('tracker')">Load: Client Document Tracker</button>
+        <button class="btn btn-primary" onclick="loadLabScenario('invoices')">Load: Invoice Follow-up</button>
+        <button class="btn btn-primary" onclick="loadLabScenario('lookup')">Load: Lookup Practice</button>
+        <button class="btn btn-outline" onclick="loadLabScenario('blank')">Blank Sheet</button>
+        <button class="btn btn-accent" onclick="evaluateAllLab()">Recalculate All</button>
+      </div>
+
+      <!-- Formula bar -->
+      <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem; background:#e8f0f8; padding:0.4rem 0.7rem; border-radius:8px; border:1px solid #c5d5e5;">
+        <span style="font-weight:700; color:var(--primary); min-width:40px;" id="labCellRef">A1</span>
+        <input type="text" id="labFormulaBar" placeholder="Enter value or formula starting with =" 
+               style="flex:1; padding:0.45rem 0.6rem; border:1.5px solid var(--border); border-radius:6px; font-family:Consolas,monospace; font-size:0.95rem;"
+               onkeydown="if(event.key==='Enter'){commitLabFormula(); event.preventDefault();}">
+        <button class="btn btn-outline" style="padding:0.4rem 0.8rem;" onclick="commitLabFormula()">Enter</button>
+      </div>
+
+      <div class="sheet-container" style="max-height:420px; overflow:auto;">
+        <table class="sheet" id="labSheet" style="font-family:Consolas, 'Segoe UI', monospace;">
+          <thead id="labHead"></thead>
+          <tbody id="labBody"></tbody>
+        </table>
+      </div>
+
+      <div class="card" style="margin-top:1rem; background:#f8fafc;">
+        <h3>Formula Cheat-Sheet for this Lab</h3>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.5rem 1.5rem; font-size:0.88rem;">
+          <div><code>=IF(E2="Pending","Follow up","")</code><br><span class="text-muted">Conditional text</span></div>
+          <div><code>=TODAY()-F2</code><br><span class="text-muted">Days overdue</span></div>
+          <div><code>=SUM(C2:C8)</code><br><span class="text-muted">Sum a range</span></div>
+          <div><code>=SUMIF(F2:F8,"Open",C2:C8)</code><br><span class="text-muted">Conditional sum</span></div>
+          <div><code>=COUNTIF(E2:E8,"Pending")</code><br><span class="text-muted">Count matching cells</span></div>
+          <div><code>=PROPER(TRIM(A2))</code><br><span class="text-muted">Clean & capitalize name</span></div>
+          <div><code>=IF(G2&gt;0,"Overdue","OK")</code><br><span class="text-muted">Nested logic</span></div>
+          <div><code>=A2&amp;" - "&amp;B2</code><br><span class="text-muted">Concatenate text</span></div>
+        </div>
+      </div>
+
+      <div class="feedback" id="fb-lab"></div>
+    </div>
+
+    <!-- EXERCISE 1: Client Document Tracker -->
+    <div class="panel" id="panel-ex1">
+      <div class="exercise-header">
+        <div>
+          <h2>📋 <span data-i18n="ex1_title">Client Document Tracker</span></h2>
+          <span class="difficulty diff-easy" data-i18n="diff_easy">Easy – Core Task</span>
+        </div>
+        <div class="timer" id="timer-ex1">00:00</div>
+      </div>
+
+      <div class="instructions">
+        <strong data-i18n="task">Your task:</strong>
+        <ol>
+          <li data-i18n="ex1_i1">Sort the table by Status (Pending first), then by Follow-up Date (earliest first).</li>
+          <li data-i18n="ex1_i2">Filter (or visually identify) only the rows that are still Pending.</li>
+          <li data-i18n="ex1_i3">Add a helper column called “Action” that shows “Follow up” when Status = Pending, otherwise leave blank. Use a formula.</li>
+          <li data-i18n="ex1_i4">Apply a visual cue (or note) for any Follow-up Date that is already past today.</li>
+        </ol>
+        <p class="mt-1" data-i18n="ex1_tip"><em>Tip: In a real interview you would use the Filter button and conditional formatting. Here, practice the logic and the formula.</em></p>
+      </div>
+
+      <div class="sheet-container">
+        <table class="sheet" id="sheet1">
+          <thead>
+            <tr>
+              <th>Client Name</th>
+              <th>Tax Year</th>
+              <th>Document</th>
+              <th>Received</th>
+              <th>Status</th>
+              <th>Follow-up</th>
+              <th>Notes</th>
+              <th>Action (formula)</th>
+            </tr>
+          </thead>
+          <tbody id="tbody1"></tbody>
+        </table>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="resetEx1()">↺ Reset Data</button>
+        <button class="btn btn-primary" onclick="checkEx1()">✓ Check My Work</button>
+        <button class="btn btn-accent" onclick="showSolution('ex1')">Show Solution Logic</button>
+      </div>
+      <div class="feedback" id="fb-ex1"></div>
+    </div>
+
+    <!-- EXERCISE 2: Invoice Tracker -->
+    <div class="panel" id="panel-ex2">
+      <div class="exercise-header">
+        <div>
+          <h2>💰 <span data-i18n="ex2_title">Invoice & Payment Follow-up</span></h2>
+          <span class="difficulty diff-medium" data-i18n="diff_medium">Medium</span>
+        </div>
+        <div class="timer" id="timer-ex2">00:00</div>
+      </div>
+
+      <div class="instructions">
+        <strong data-i18n="task">Your task:</strong>
+        <ol>
+          <li data-i18n="ex2_i1">Calculate “Days Overdue” for every invoice (use TODAY() logic: today minus Due Date). Negative or zero = not overdue.</li>
+          <li data-i18n="ex2_i2">Create a summary: Total Open Amount and Total Overdue Amount.</li>
+          <li data-i18n="ex2_i3">Identify which clients need a payment follow-up call today.</li>
+        </ol>
+      </div>
+
+      <div class="sheet-container">
+        <table class="sheet" id="sheet2">
+          <thead>
+            <tr>
+              <th>Client</th>
+              <th>Invoice #</th>
+              <th>Amount</th>
+              <th>Date Sent</th>
+              <th>Due Date</th>
+              <th>Status</th>
+              <th>Days Overdue</th>
+              <th>Last Contact</th>
+            </tr>
+          </thead>
+          <tbody id="tbody2"></tbody>
+        </table>
+      </div>
+
+      <div class="card" style="background:#f8fafc;">
+        <h3 data-i18n="summary_title">Quick Summary (fill these)</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Total Open Amount ($)</label>
+            <input type="text" id="sumOpen" placeholder="e.g. 2450">
+          </div>
+          <div class="form-group">
+            <label>Total Overdue Amount ($)</label>
+            <input type="text" id="sumOverdue" placeholder="e.g. 980">
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="resetEx2()">↺ Reset</button>
+        <button class="btn btn-primary" onclick="checkEx2()">✓ Check My Work</button>
+        <button class="btn btn-accent" onclick="showSolution('ex2')">Show Solution Logic</button>
+      </div>
+      <div class="feedback" id="fb-ex2"></div>
+    </div>
+
+    <!-- EXERCISE 3: Lookup -->
+    <div class="panel" id="panel-ex3">
+      <div class="exercise-header">
+        <div>
+          <h2>🔍 <span data-i18n="ex3_title">Lookup & Matching</span></h2>
+          <span class="difficulty diff-medium" data-i18n="diff_medium">Medium</span>
+        </div>
+        <div class="timer" id="timer-ex3">00:00</div>
+      </div>
+
+      <div class="instructions">
+        <strong data-i18n="task">Your task:</strong>
+        <p data-i18n="ex3_desc">You have a Client Master list and a Missing Documents list. Pull the correct Email and Phone into the Missing Documents table for each client.</p>
+        <p data-i18n="ex3_formula"><em>In real Sheets/Excel you would use XLOOKUP, VLOOKUP or INDEX+MATCH. Here, fill the correct values and explain which formula you would use.</em></p>
+      </div>
+
+      <div class="card">
+        <h3 data-i18n="master_list">Client Master</h3>
+        <div class="sheet-container">
+          <table class="sheet">
+            <thead><tr><th>Client ID</th><th>Client Name</th><th>Email</th><th>Phone</th></tr></thead>
+            <tbody>
+              <tr><td>C001</td><td>Martinez Family</td><td>martinez.tax@email.com</td><td>305-555-0142</td></tr>
+              <tr><td>C002</td><td>Lopez LLC</td><td>admin@lopezllc.com</td><td>786-555-0198</td></tr>
+              <tr><td>C003</td><td>Garcia & Sons</td><td>info@garciasons.com</td><td>954-555-0110</td></tr>
+              <tr><td>C004</td><td>Rivera Consulting</td><td>billing@riveraconsult.com</td><td>305-555-0177</td></tr>
+              <tr><td>C005</td><td>Torres Holdings</td><td>finance@torresh.com</td><td>561-555-0133</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 data-i18n="missing_docs">Missing Documents – Fill Email & Phone</h3>
+        <div class="sheet-container">
+          <table class="sheet" id="sheet3">
+            <thead>
+              <tr><th>Client Name</th><th>Missing Doc</th><th>Email (lookup)</th><th>Phone (lookup)</th></tr>
+            </thead>
+            <tbody id="tbody3"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="resetEx3()">↺ Reset</button>
+        <button class="btn btn-primary" onclick="checkEx3()">✓ Check My Work</button>
+        <button class="btn btn-accent" onclick="showSolution('ex3')">Show Formula Examples</button>
+      </div>
+      <div class="feedback" id="fb-ex3"></div>
+    </div>
+
+    <!-- EXERCISE 4: Data Cleaning -->
+    <div class="panel" id="panel-ex4">
+      <div class="exercise-header">
+        <div>
+          <h2>🧹 <span data-i18n="ex4_title">Data Cleaning Challenge</span></h2>
+          <span class="difficulty diff-hard" data-i18n="diff_hard">Hard – Very Common</span>
+        </div>
+        <div class="timer" id="timer-ex4">00:00</div>
+      </div>
+
+      <div class="instructions">
+        <strong data-i18n="task">Your task:</strong>
+        <p data-i18n="ex4_desc">The data below is messy (extra spaces, inconsistent capitalization, mixed date formats, extra characters). Clean it so that:</p>
+        <ol>
+          <li data-i18n="ex4_i1">Client names are in Proper Case with no leading/trailing spaces.</li>
+          <li data-i18n="ex4_i2">Dates are in a consistent YYYY-MM-DD format.</li>
+          <li data-i18n="ex4_i3">Document types are standardized (W-2, 1099, K-1, Organizer).</li>
+          <li data-i18n="ex4_i4">No extra symbols or double spaces remain.</li>
+        </ol>
+      </div>
+
+      <div class="sheet-container">
+        <table class="sheet" id="sheet4">
+          <thead>
+            <tr><th>Raw Client Name</th><th>Raw Date</th><th>Raw Document</th><th>Clean Name</th><th>Clean Date</th><th>Clean Doc</th></tr>
+          </thead>
+          <tbody id="tbody4"></tbody>
+        </table>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="resetEx4()">↺ Reset</button>
+        <button class="btn btn-primary" onclick="checkEx4()">✓ Check My Work</button>
+        <button class="btn btn-accent" onclick="showSolution('ex4')">Show Cleaning Functions</button>
+      </div>
+      <div class="feedback" id="fb-ex4"></div>
+    </div>
+
+    <!-- EXERCISE 5: Status Dashboard -->
+    <div class="panel" id="panel-ex5">
+      <div class="exercise-header">
+        <div>
+          <h2>📊 <span data-i18n="ex5_title">Simple Status Dashboard</span></h2>
+          <span class="difficulty diff-easy" data-i18n="diff_easy">Easy</span>
+        </div>
+        <div class="timer" id="timer-ex5">00:00</div>
+      </div>
+
+      <div class="instructions">
+        <strong data-i18n="task">Your task:</strong>
+        <p data-i18n="ex5_desc">Mark each onboarding step as Done or Pending. Then calculate the completion percentage and identify the next action.</p>
+      </div>
+
+      <div class="card">
+        <h3 data-i18n="onboarding">New Client Onboarding – Ramirez Tax</h3>
+        <table class="sheet" id="sheet5">
+          <thead><tr><th>Step</th><th>Status</th><th>Completed?</th></tr></thead>
+          <tbody id="tbody5"></tbody>
+        </table>
+        <div class="form-grid mt-1">
+          <div class="form-group">
+            <label data-i18n="pct_complete">% Complete</label>
+            <input type="text" id="pctComplete" placeholder="e.g. 60">
+          </div>
+          <div class="form-group">
+            <label data-i18n="next_action">Next Action</label>
+            <input type="text" id="nextAction" placeholder="What should happen next?">
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="resetEx5()">↺ Reset</button>
+        <button class="btn btn-primary" onclick="checkEx5()">✓ Check My Work</button>
+      </div>
+      <div class="feedback" id="fb-ex5"></div>
+    </div>
+
+    <!-- CALENDAR 1 -->
+    <div class="panel" id="panel-cal1">
+      <div class="exercise-header">
+        <div>
+          <h2>📅 <span data-i18n="cal1_title">Create a Client Appointment</span></h2>
+          <span class="difficulty diff-easy" data-i18n="diff_easy">Easy – High Frequency</span>
+        </div>
+        <div class="timer" id="timer-cal1">00:00</div>
+      </div>
+
+      <div class="instructions">
+        <strong data-i18n="task">Your task:</strong>
+        <p data-i18n="cal1_desc">Create a new appointment for a bilingual client call to collect remaining documents. Fill every field correctly and set a proper reminder.</p>
+      </div>
+
+      <div class="card">
+        <h3 data-i18n="new_event">New Event</h3>
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Title / Subject</label>
+            <input type="text" id="evTitle" placeholder="e.g. Document Collection Call – Martinez Family">
+          </div>
+          <div class="form-group">
+            <label>Date</label>
+            <input type="date" id="evDate">
+          </div>
+          <div class="form-group">
+            <label>Start Time (ET)</label>
+            <input type="time" id="evTime" value="10:00">
+          </div>
+          <div class="form-group">
+            <label>Duration</label>
+            <select id="evDuration">
+              <option value="30">30 minutes</option>
+              <option value="45">45 minutes</option>
+              <option value="60" selected>60 minutes</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Reminder</label>
+            <select id="evReminder">
+              <option value="none">No reminder</option>
+              <option value="15">15 minutes before</option>
+              <option value="60" selected>1 hour before</option>
+              <option value="1440">1 day before</option>
+              <option value="both">1 day + 1 hour</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Description / Agenda</label>
+            <textarea id="evDesc" rows="3" placeholder="Include: purpose, language, documents needed, any special notes..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>Attendees / Type</label>
+            <select id="evType">
+              <option value="client">Client Appointment</option>
+              <option value="internal">Internal Meeting</option>
+              <option value="deadline">Tax Deadline</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="saveEvent()">Save Appointment</button>
+          <button class="btn btn-outline" onclick="clearEventForm()">Clear</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 data-i18n="calendar_view">This Week (Mock View)</h3>
+        <div class="calendar-grid" id="calGrid"></div>
+      </div>
+
+      <div class="feedback" id="fb-cal1"></div>
+    </div>
+
+    <!-- CALENDAR 2 -->
+    <div class="panel" id="panel-cal2">
+      <div class="exercise-header">
+        <div>
+          <h2>🔄 <span data-i18n="cal2_title">Reschedule & Update</span></h2>
+          <span class="difficulty diff-medium" data-i18n="diff_medium">Medium</span>
+        </div>
+        <div class="timer" id="timer-cal2">00:00</div>
+      </div>
+
+      <div class="instructions">
+        <strong data-i18n="task">Your task:</strong>
+        <p data-i18n="cal2_desc">An existing client call needs to be moved. Update the time, add a note about the change, and make sure the reminder is still appropriate.</p>
+      </div>
+
+      <div class="card">
+        <h3 data-i18n="existing_event">Existing Event (click to edit)</h3>
+        <div id="existingEvents"></div>
+      </div>
+
+      <div class="card" id="editPanel" style="display:none;">
+        <h3 data-i18n="edit_event">Edit Event</h3>
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Title</label>
+            <input type="text" id="editTitle">
+          </div>
+          <div class="form-group">
+            <label>New Date</label>
+            <input type="date" id="editDate">
+          </div>
+          <div class="form-group">
+            <label>New Time</label>
+            <input type="time" id="editTime">
+          </div>
+          <div class="form-group full">
+            <label>Update Notes (add reason for reschedule)</label>
+            <textarea id="editNotes" rows="2"></textarea>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" onclick="applyReschedule()">Apply Changes</button>
+          <button class="btn btn-outline" onclick="cancelEdit()">Cancel</button>
+        </div>
+      </div>
+
+      <div class="feedback" id="fb-cal2"></div>
+    </div>
+
+    <!-- ACCOUNTING 1: Key Tax Documents -->
+    <div class="panel" id="panel-acct1">
+      <div class="exercise-header">
+        <div>
+          <h2>📄 <span data-i18n="acct1_title">Key Tax Documents</span></h2>
+          <span class="difficulty diff-easy" data-i18n="diff_easy">Easy – Must Know</span>
+        </div>
+        <div class="timer" id="timer-acct1">00:00</div>
+      </div>
+      <div class="instructions">
+        <strong data-i18n="task">Your task:</strong>
+        <p data-i18n="acct1_desc">Match each document to its correct description. These are the exact forms and papers you will handle daily in this role.</p>
+      </div>
+      <div class="card">
+        <div id="docMatchArea"></div>
+        <div class="btn-row">
+          <button class="btn btn-outline" onclick="resetAcct1()">↺ Reset</button>
+          <button class="btn btn-primary" onclick="checkAcct1()">✓ Check Matches</button>
+        </div>
+        <div class="feedback" id="fb-acct1"></div>
+      </div>
+      <div class="card">
+        <h3 data-i18n="acct1_quick">Quick Reference (after you finish)</h3>
+        <ul style="margin-left:1.2rem; font-size:0.92rem;">
+          <li><strong>W-2</strong> – Wage and tax statement from an employer (employee wages, federal/state tax withheld).</li>
+          <li><strong>1099</strong> – Reports various non-employee income (independent contractors, interest, dividends, etc.). Common: 1099-NEC, 1099-MISC, 1099-INT.</li>
+          <li><strong>K-1</strong> – Partner’s or shareholder’s share of income, deductions, credits from a partnership, S-corp, or trust.</li>
+          <li><strong>Tax Organizer</strong> – Questionnaire the firm sends to the client to gather all needed information for preparing the return.</li>
+          <li><strong>Engagement Letter</strong> – Contract that defines the scope of services, fees, and responsibilities between the firm and the client.</li>
+          <li><strong>Extension (Form 4868)</strong> – Request for more time to file the return (usually to October 15). Does not extend time to pay any tax owed.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ACCOUNTING 2: Deadlines -->
+    <div class="panel" id="panel-acct2">
+      <div class="exercise-header">
+        <div>
+          <h2>🗓️ <span data-i18n="acct2_title">Tax Deadlines & Calendar Awareness</span></h2>
+          <span class="difficulty diff-easy" data-i18n="diff_easy">Easy – Core Knowledge</span>
+        </div>
+        <div class="timer" id="timer-acct2">00:00</div>
+      </div>
+      <div class="instructions">
+        <strong data-i18n="task">Your task:</strong>
+        <p data-i18n="acct2_desc">Select the correct typical deadline or fact for each item. These dates drive almost all client follow-up work.</p>
+      </div>
+      <div class="card" id="deadlineQuiz"></div>
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="resetAcct2()">↺ Reset</button>
+        <button class="btn btn-primary" onclick="checkAcct2()">✓ Check Answers</button>
+      </div>
+      <div class="feedback" id="fb-acct2"></div>
+    </div>
+
+    <!-- ACCOUNTING 3: Onboarding Flow -->
+    <div class="panel" id="panel-acct3">
+      <div class="exercise-header">
+        <div>
+          <h2>🔄 <span data-i18n="acct3_title">Client Onboarding Sequence</span></h2>
+          <span class="difficulty diff-medium" data-i18n="diff_medium">Medium</span>
+        </div>
+        <div class="timer" id="timer-acct3">00:00</div>
+      </div>
+      <div class="instructions">
+        <strong data-i18n="task">Your task:</strong>
+        <p data-i18n="acct3_desc">Put the typical new-client onboarding steps in the correct order (1 = first action). This mirrors the exact workflow described in the job posting.</p>
+      </div>
+      <div class="card">
+        <div id="onboardOrder"></div>
+        <div class="btn-row">
+          <button class="btn btn-outline" onclick="resetAcct3()">↺ Reset Order</button>
+          <button class="btn btn-primary" onclick="checkAcct3()">✓ Check Order</button>
+        </div>
+        <div class="feedback" id="fb-acct3"></div>
+      </div>
+    </div>
+
+    <!-- ACCOUNTING 4: Scenarios -->
+    <div class="panel" id="panel-acct4">
+      <div class="exercise-header">
+        <div>
+          <h2>💬 <span data-i18n="acct4_title">Client Scenarios & Professional Responses</span></h2>
+          <span class="difficulty diff-medium" data-i18n="diff_medium">Medium – High Value</span>
+        </div>
+        <div class="timer" id="timer-acct4">00:00</div>
+      </div>
+      <div class="instructions">
+        <strong data-i18n="task">Your task:</strong>
+        <p data-i18n="acct4_desc">For each realistic situation, choose the most professional and correct next action. These test judgment, not just memorization.</p>
+      </div>
+      <div class="card" id="scenarioArea"></div>
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="resetAcct4()">↺ Reset</button>
+        <button class="btn btn-primary" onclick="checkAcct4()">✓ Check Responses</button>
+      </div>
+      <div class="feedback" id="fb-acct4"></div>
+    </div>
+
+    <!-- ACCOUNTING 5: Core Terms -->
+    <div class="panel" id="panel-acct5">
+      <div class="exercise-header">
+        <div>
+          <h2>📚 <span data-i18n="acct5_title">Core Accounting & Tax Terms</span></h2>
+          <span class="difficulty diff-easy" data-i18n="diff_easy">Easy – Foundation</span>
+        </div>
+        <div class="timer" id="timer-acct5">00:00</div>
+      </div>
+      <div class="instructions">
+        <strong data-i18n="task">Your task:</strong>
+        <p data-i18n="acct5_desc">Select the best definition for each term. These are the concepts interviewers expect an entry-level assistant to recognize.</p>
+      </div>
+      <div class="card" id="termsQuiz"></div>
+      <div class="btn-row">
+        <button class="btn btn-outline" onclick="resetAcct5()">↺ Reset</button>
+        <button class="btn btn-primary" onclick="checkAcct5()">✓ Check Answers</button>
+      </div>
+      <div class="feedback" id="fb-acct5"></div>
+    </div>
+
+    <!-- MIXED CHALLENGE -->
+    <div class="panel" id="panel-mixed">
+      <div class="hero">
+        <h1 data-i18n="mixed_title">Mixed Challenge – Simulate the Real Check</h1>
+        <p data-i18n="mixed_sub">A short timed sequence that combines spreadsheet + calendar work, just like the interview skills portion.</p>
+      </div>
+
+      <div class="card">
+        <h2 data-i18n="challenge_brief">Challenge Brief</h2>
+        <p data-i18n="mixed_desc">You have 8 minutes. Complete these three micro-tasks in order:</p>
+        <ol>
+          <li data-i18n="mixed_1">Open the Client Document Tracker and mark the two most urgent Pending items (earliest follow-up dates).</li>
+          <li data-i18n="mixed_2">Create a calendar appointment for the first urgent client for tomorrow at 11:00 AM ET (30 min, bilingual document collection).</li>
+          <li data-i18n="mixed_3">Write a one-sentence status note you would put in the client file.</li>
+        </ol>
+        <div class="btn-row">
+          <button class="btn btn-primary" id="startChallengeBtn" onclick="startMixedChallenge()">Start 8-Minute Challenge</button>
+          <span class="timer" id="mixedTimer" style="font-size:1.4rem;">08:00</span>
+        </div>
+        <div id="mixedWorkspace" class="hidden">
+          <p class="mt-1"><strong data-i18n="status_note_label">Your status note:</strong></p>
+          <textarea id="statusNote" rows="2" style="width:100%; margin-top:0.4rem;" placeholder="One clear sentence..."></textarea>
+          <div class="btn-row">
+            <button class="btn btn-success" onclick="finishMixed()">Finish & Score</button>
+          </div>
+        </div>
+        <div class="feedback" id="fb-mixed"></div>
+      </div>
+    </div>
+
+    <!-- TIPS -->
+    <div class="panel" id="panel-tips">
+      <div class="card">
+        <h2>💡 <span data-i18n="tips_title">Interview Tips – Skills Check</span></h2>
+        
+        <div class="tip-box">
+          <strong data-i18n="tip1_t">Narrate while you work</strong>
+          <p data-i18n="tip1_d">Say out loud (in the language they are using at that moment): “I’m sorting by Status so Pending items come first… now adding a simple IF formula for the Action column.” This shows confidence and communication skill.</p>
+        </div>
+
+        <div class="tip-box">
+          <strong data-i18n="tip2_t">Speed is secondary to accuracy</strong>
+          <p data-i18n="tip2_d">They prefer a correct result in 90 seconds over a fast but messy result. Check one or two cells after writing a formula.</p>
+        </div>
+
+        <div class="tip-box">
+          <strong data-i18n="tip3_t">Use the tools they mention</strong>
+          <p data-i18n="tip3_d">Have Google Sheets and Google Calendar already open and signed in. If they ask for Excel/Outlook, switch calmly. Knowing both is a plus.</p>
+        </div>
+
+        <div class="tip-box">
+          <strong data-i18n="tip4_t">Bilingual flow</strong>
+          <p data-i18n="tip4_d">Part of the call will be in Spanish. Practice describing the same action in both languages: “I’m applying a filter” / “Estoy aplicando un filtro”.</p>
+        </div>
+
+        <div class="tip-box">
+          <strong data-i18n="tip5_t">If you get stuck</strong>
+          <p data-i18n="tip5_d">Say: “I would normally use XLOOKUP for this. Let me do it with a simpler method that still gives the correct result.” Then deliver a correct answer. Honesty + working solution is better than silence.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 data-i18n="formulas_title">Formulas You Should Be Able to Type Quickly</h2>
+        <div class="sheet-container">
+          <table class="sheet">
+            <thead><tr><th>Need</th><th>Google Sheets / Excel</th></tr></thead>
+            <tbody>
+              <tr><td>If status is Pending → “Follow up”</td><td><code>=IF(E2="Pending","Follow up","")</code></td></tr>
+              <tr><td>Count Pending rows</td><td><code>=COUNTIF(E:E,"Pending")</code></td></tr>
+              <tr><td>Days overdue</td><td><code>=TODAY()-F2</code> (then format as number)</td></tr>
+              <tr><td>Sum amounts where Status = Open</td><td><code>=SUMIF(F:F,"Open",C:C)</code></td></tr>
+              <tr><td>Lookup email by name</td><td><code>=XLOOKUP(A2, Master!B:B, Master!C:C)</code> or VLOOKUP / INDEX+MATCH</td></tr>
+              <tr><td>Remove extra spaces</td><td><code>=TRIM(A2)</code></td></tr>
+              <tr><td>Proper case</td><td><code>=PROPER(TRIM(A2))</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROGRESS -->
+    <div class="panel" id="panel-progress">
+      <div class="card">
+        <h2>🏆 <span data-i18n="progress_title">Your Progress</span></h2>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+        </div>
+        <p class="text-muted" id="progressText">0 of 7 core exercises completed</p>
+
+        <div id="progressList" class="mt-1"></div>
+
+        <div class="motivation" style="margin-top:1.5rem;">
+          <h3 data-i18n="keep_going">Keep going – consistency beats intensity</h3>
+          <p data-i18n="keep_going_t">Even 20 focused minutes a day on these exact tasks will make the live skills check feel familiar instead of stressful.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+// ========== STATE ==========
+const state = {
+  lang: 'en',
+  completed: new Set(),
+  scores: {},
+  startTimes: {},
+  totalSeconds: 0,
+  events: [],
+  mixedRunning: false,
+  mixedInterval: null
+};
+
+// ========== i18n ==========
+const i18n = {
+  en: {
+    nav_start: "Start", nav_dashboard: "Dashboard", nav_sheets: "Spreadsheets",
+    nav_ex1: "Client Document Tracker", nav_ex2: "Invoice & Payments", nav_ex3: "Lookup & Matching",
+    nav_ex4: "Data Cleaning", nav_ex5: "Status Dashboard", nav_calendar: "Calendar",
+    nav_cal1: "Create Appointment", nav_cal2: "Reschedule & Reminders", nav_more: "More",
+    nav_acct: "Accounting Basics", nav_acct1: "Key Tax Documents", nav_acct2: "Deadlines & Calendar",
+    nav_acct3: "Client Onboarding Flow", nav_acct4: "Scenarios & Responses", nav_acct5: "Core Terms Quiz",
+    nav_mixed: "Mixed Challenge", nav_tips: "Interview Tips", nav_progress: "My Progress",
+    acct1_title: "Key Tax Documents", acct2_title: "Tax Deadlines & Calendar Awareness",
+    acct3_title: "Client Onboarding Sequence", acct4_title: "Client Scenarios & Professional Responses",
+    acct5_title: "Core Accounting & Tax Terms",
+    acct1_desc: "Match each document to its correct description. These are the exact forms and papers you will handle daily in this role.",
+    acct2_desc: "Select the correct typical deadline or fact for each item. These dates drive almost all client follow-up work.",
+    acct3_desc: "Put the typical new-client onboarding steps in the correct order (1 = first action). This mirrors the exact workflow described in the job posting.",
+    acct4_desc: "For each realistic situation, choose the most professional and correct next action. These test judgment, not just memorization.",
+    acct5_desc: "Select the best definition for each term. These are the concepts interviewers expect an entry-level assistant to recognize.",
+    acct1_quick: "Quick Reference (after you finish)",
+    hero_title: "Master the Skills Check",
+    hero_sub: "Practice the exact Google Sheets / Excel and Calendar tasks most likely to appear in the Accounting Group of South Florida screening interview. Train until every action feels natural.",
+    stat_completed: "Exercises Done", stat_score: "Avg. Score", stat_time: "Practice Time", stat_streak: "Day Streak",
+    ready_title: "Interview Readiness Checklist",
+    check1: "I can sort and filter a client document list in under 60 seconds",
+    check2: "I can write a simple IF or COUNTIF formula without hesitation",
+    check3: "I can use VLOOKUP / XLOOKUP or INDEX-MATCH for matching data",
+    check4: "I can clean messy data (TRIM, proper case, dates)",
+    check5: "I can create a client appointment with title, time, reminder and notes",
+    check6: "I can reschedule an event and update attendees/description",
+    check7: "I can narrate what I am doing clearly in English and Spanish",
+    mot_title: "You are preparing for a real opportunity",
+    mot_text: "This is an entry-level role with training. Showing calm, accurate, organized work on the tools they already use is the strongest signal you can give. Practice here until it feels easy.",
+    start_here: "Recommended Path", path_desc: "Complete the exercises in order. Each one builds the exact habits the interview will test.",
+    task: "Your task:",
+    diff_easy: "Easy – Core Task", diff_medium: "Medium", diff_hard: "Hard – Very Common",
+    ex1_title: "Client Document Tracker",
+    ex1_i1: "Sort the table by Status (Pending first), then by Follow-up Date (earliest first).",
+    ex1_i2: "Filter (or visually identify) only the rows that are still Pending.",
+    ex1_i3: "Add a helper column called “Action” that shows “Follow up” when Status = Pending, otherwise leave blank. Use a formula.",
+    ex1_i4: "Apply a visual cue (or note) for any Follow-up Date that is already past today.",
+    ex1_tip: "Tip: In a real interview you would use the Filter button and conditional formatting. Here, practice the logic and the formula.",
+    ex2_title: "Invoice & Payment Follow-up",
+    ex2_i1: "Calculate “Days Overdue” for every invoice (use TODAY() logic: today minus Due Date). Negative or zero = not overdue.",
+    ex2_i2: "Create a summary: Total Open Amount and Total Overdue Amount.",
+    ex2_i3: "Identify which clients need a payment follow-up call today.",
+    summary_title: "Quick Summary (fill these)",
+    ex3_title: "Lookup & Matching",
+    ex3_desc: "You have a Client Master list and a Missing Documents list. Pull the correct Email and Phone into the Missing Documents table for each client.",
+    ex3_formula: "In real Sheets/Excel you would use XLOOKUP, VLOOKUP or INDEX+MATCH. Here, fill the correct values and explain which formula you would use.",
+    master_list: "Client Master", missing_docs: "Missing Documents – Fill Email & Phone",
+    ex4_title: "Data Cleaning Challenge",
+    ex4_desc: "The data below is messy (extra spaces, inconsistent capitalization, mixed date formats, extra characters). Clean it so that:",
+    ex4_i1: "Client names are in Proper Case with no leading/trailing spaces.",
+    ex4_i2: "Dates are in a consistent YYYY-MM-DD format.",
+    ex4_i3: "Document types are standardized (W-2, 1099, K-1, Organizer).",
+    ex4_i4: "No extra symbols or double spaces remain.",
+    ex5_title: "Simple Status Dashboard",
+    ex5_desc: "Mark each onboarding step as Done or Pending. Then calculate the completion percentage and identify the next action.",
+    onboarding: "New Client Onboarding – Ramirez Tax", pct_complete: "% Complete", next_action: "Next Action",
+    cal1_title: "Create a Client Appointment",
+    cal1_desc: "Create a new appointment for a bilingual client call to collect remaining documents. Fill every field correctly and set a proper reminder.",
+    new_event: "New Event", calendar_view: "This Week (Mock View)",
+    cal2_title: "Reschedule & Update",
+    cal2_desc: "An existing client call needs to be moved. Update the time, add a note about the change, and make sure the reminder is still appropriate.",
+    existing_event: "Existing Event (click to edit)", edit_event: "Edit Event",
+    mixed_title: "Mixed Challenge – Simulate the Real Check",
+    mixed_sub: "A short timed sequence that combines spreadsheet + calendar work, just like the interview skills portion.",
+    challenge_brief: "Challenge Brief",
+    mixed_desc: "You have 8 minutes. Complete these three micro-tasks in order:",
+    mixed_1: "Open the Client Document Tracker and mark the two most urgent Pending items (earliest follow-up dates).",
+    mixed_2: "Create a calendar appointment for the first urgent client for tomorrow at 11:00 AM ET (30 min, bilingual document collection).",
+    mixed_3: "Write a one-sentence status note you would put in the client file.",
+    status_note_label: "Your status note:",
+    tips_title: "Interview Tips – Skills Check",
+    tip1_t: "Narrate while you work", tip1_d: "Say out loud (in the language they are using at that moment): “I’m sorting by Status so Pending items come first… now adding a simple IF formula for the Action column.” This shows confidence and communication skill.",
+    tip2_t: "Speed is secondary to accuracy", tip2_d: "They prefer a correct result in 90 seconds over a fast but messy result. Check one or two cells after writing a formula.",
+    tip3_t: "Use the tools they mention", tip3_d: "Have Google Sheets and Google Calendar already open and signed in. If they ask for Excel/Outlook, switch calmly. Knowing both is a plus.",
+    tip4_t: "Bilingual flow", tip4_d: "Part of the call will be in Spanish. Practice describing the same action in both languages: “I’m applying a filter” / “Estoy aplicando un filtro”.",
+    tip5_t: "If you get stuck", tip5_d: "Say: “I would normally use XLOOKUP for this. Let me do it with a simpler method that still gives the correct result.” Then deliver a correct answer. Honesty + working solution is better than silence.",
+    formulas_title: "Formulas You Should Be Able to Type Quickly",
+    progress_title: "Your Progress", keep_going: "Keep going – consistency beats intensity",
+    keep_going_t: "Even 20 focused minutes a day on these exact tasks will make the live skills check feel familiar instead of stressful."
+  },
+  es: {
+    nav_start: "Inicio", nav_dashboard: "Panel", nav_sheets: "Hojas de cálculo",
+    nav_ex1: "Seguimiento de Documentos", nav_ex2: "Facturas y Pagos", nav_ex3: "Búsqueda y Coincidencia",
+    nav_ex4: "Limpieza de Datos", nav_ex5: "Panel de Estado", nav_calendar: "Calendario",
+    nav_cal1: "Crear Cita", nav_cal2: "Reprogramar y Recordatorios", nav_more: "Más",
+    nav_acct: "Fundamentos Contables", nav_acct1: "Documentos Tributarios Clave", nav_acct2: "Fechas Límite y Calendario",
+    nav_acct3: "Flujo de Onboarding de Clientes", nav_acct4: "Escenarios y Respuestas", nav_acct5: "Quiz de Términos Clave",
+    nav_mixed: "Desafío Mixto", nav_tips: "Consejos de Entrevista", nav_progress: "Mi Progreso",
+    acct1_title: "Documentos Tributarios Clave", acct2_title: "Fechas Límite Tributarias y Conciencia del Calendario",
+    acct3_title: "Secuencia de Onboarding de Clientes", acct4_title: "Escenarios con Clientes y Respuestas Profesionales",
+    acct5_title: "Términos Contables y Tributarios Clave",
+    acct1_desc: "Empareja cada documento con su descripción correcta. Estos son los formularios y papeles que manejarás a diario en este rol.",
+    acct2_desc: "Selecciona la fecha límite o el hecho típico correcto para cada ítem. Estas fechas impulsan casi todo el trabajo de seguimiento con clientes.",
+    acct3_desc: "Ordena los pasos típicos de onboarding de un cliente nuevo (1 = primera acción). Esto refleja el flujo exacto descrito en la oferta de trabajo.",
+    acct4_desc: "Para cada situación realista, elige la siguiente acción más profesional y correcta. Estos prueban juicio, no solo memorización.",
+    acct5_desc: "Selecciona la mejor definición para cada término. Estos son los conceptos que los entrevistadores esperan que un asistente de nivel de entrada reconozca.",
+    acct1_quick: "Referencia Rápida (después de terminar)",
+    hero_title: "Domina la Prueba de Habilidades",
+    hero_sub: "Practica exactamente las tareas de Google Sheets / Excel y Calendario que más probablemente aparecerán en la entrevista de screening de Accounting Group of South Florida. Entrena hasta que cada acción se sienta natural.",
+    stat_completed: "Ejercicios Hechos", stat_score: "Puntaje Prom.", stat_time: "Tiempo de Práctica", stat_streak: "Racha de Días",
+    ready_title: "Lista de Preparación para la Entrevista",
+    check1: "Puedo ordenar y filtrar una lista de documentos de clientes en menos de 60 segundos",
+    check2: "Puedo escribir una fórmula IF o COUNTIF simple sin dudar",
+    check3: "Puedo usar VLOOKUP / XLOOKUP o INDEX-MATCH para coincidir datos",
+    check4: "Puedo limpiar datos desordenados (TRIM, mayúsculas correctas, fechas)",
+    check5: "Puedo crear una cita con cliente con título, hora, recordatorio y notas",
+    check6: "Puedo reprogramar un evento y actualizar asistentes/descripción",
+    check7: "Puedo narrar lo que estoy haciendo claramente en inglés y español",
+    mot_title: "Te estás preparando para una oportunidad real",
+    mot_text: "Este es un rol de nivel de entrada con capacitación. Mostrar trabajo calmado, preciso y organizado en las herramientas que ya usan es la señal más fuerte que puedes dar. Practica aquí hasta que se sienta fácil.",
+    start_here: "Ruta Recomendada", path_desc: "Completa los ejercicios en orden. Cada uno construye los hábitos exactos que la entrevista probará.",
+    task: "Tu tarea:",
+    diff_easy: "Fácil – Tarea Central", diff_medium: "Medio", diff_hard: "Difícil – Muy Común",
+    ex1_title: "Seguimiento de Documentos de Clientes",
+    ex1_i1: "Ordena la tabla por Estado (Pendiente primero), luego por Fecha de Seguimiento (más temprana primero).",
+    ex1_i2: "Filtra (o identifica visualmente) solo las filas que aún están Pendientes.",
+    ex1_i3: "Agrega una columna auxiliar llamada “Acción” que muestre “Seguimiento” cuando Estado = Pendiente, de lo contrario déjala en blanco. Usa una fórmula.",
+    ex1_i4: "Aplica una señal visual (o nota) para cualquier Fecha de Seguimiento que ya haya pasado.",
+    ex1_tip: "Consejo: En una entrevista real usarías el botón Filtro y formato condicional. Aquí practica la lógica y la fórmula.",
+    ex2_title: "Seguimiento de Facturas y Pagos",
+    ex2_i1: "Calcula “Días de Mora” para cada factura (lógica de HOY(): hoy menos Fecha de Vencimiento). Negativo o cero = no vencido.",
+    ex2_i2: "Crea un resumen: Monto Total Abierto y Monto Total Vencido.",
+    ex2_i3: "Identifica qué clientes necesitan una llamada de seguimiento de pago hoy.",
+    summary_title: "Resumen Rápido (completa estos)",
+    ex3_title: "Búsqueda y Coincidencia",
+    ex3_desc: "Tienes una lista Maestra de Clientes y una lista de Documentos Faltantes. Extrae el Correo y Teléfono correctos a la tabla de Documentos Faltantes para cada cliente.",
+    ex3_formula: "En Sheets/Excel real usarías XLOOKUP, VLOOKUP o INDEX+MATCH. Aquí llena los valores correctos y explica qué fórmula usarías.",
+    master_list: "Lista Maestra de Clientes", missing_docs: "Documentos Faltantes – Llena Correo y Teléfono",
+    ex4_title: "Desafío de Limpieza de Datos",
+    ex4_desc: "Los datos abajo están desordenados (espacios extra, capitalización inconsistente, formatos de fecha mixtos, caracteres extra). Límpialos para que:",
+    ex4_i1: "Los nombres de clientes estén en Formato de Título sin espacios al inicio/final.",
+    ex4_i2: "Las fechas estén en formato consistente AAAA-MM-DD.",
+    ex4_i3: "Los tipos de documento estén estandarizados (W-2, 1099, K-1, Organizer).",
+    ex4_i4: "No queden símbolos extra ni espacios dobles.",
+    ex5_title: "Panel de Estado Simple",
+    ex5_desc: "Marca cada paso de onboarding como Hecho o Pendiente. Luego calcula el porcentaje de completado e identifica la siguiente acción.",
+    onboarding: "Onboarding Nuevo Cliente – Ramirez Tax", pct_complete: "% Completado", next_action: "Siguiente Acción",
+    cal1_title: "Crear una Cita con Cliente",
+    cal1_desc: "Crea una nueva cita para una llamada bilingüe con cliente para recolectar documentos pendientes. Llena cada campo correctamente y configura un recordatorio adecuado.",
+    new_event: "Nuevo Evento", calendar_view: "Esta Semana (Vista Simulada)",
+    cal2_title: "Reprogramar y Actualizar",
+    cal2_desc: "Una llamada existente con cliente necesita moverse. Actualiza la hora, agrega una nota sobre el cambio y asegúrate de que el recordatorio siga siendo apropiado.",
+    existing_event: "Evento Existente (haz clic para editar)", edit_event: "Editar Evento",
+    mixed_title: "Desafío Mixto – Simula la Prueba Real",
+    mixed_sub: "Una secuencia corta cronometrada que combina trabajo de hoja de cálculo + calendario, igual que la porción de habilidades de la entrevista.",
+    challenge_brief: "Brief del Desafío",
+    mixed_desc: "Tienes 8 minutos. Completa estas tres micro-tareas en orden:",
+    mixed_1: "Abre el Seguimiento de Documentos y marca los dos ítems Pendientes más urgentes (fechas de seguimiento más tempranas).",
+    mixed_2: "Crea una cita en el calendario para el primer cliente urgente para mañana a las 11:00 AM ET (30 min, recolección de documentos bilingüe).",
+    mixed_3: "Escribe una nota de estado de una oración que pondrías en el archivo del cliente.",
+    status_note_label: "Tu nota de estado:",
+    tips_title: "Consejos de Entrevista – Prueba de Habilidades",
+    tip1_t: "Narra mientras trabajas", tip1_d: "Di en voz alta (en el idioma que estén usando en ese momento): “Estoy ordenando por Estado para que los Pendientes queden primero… ahora agrego una fórmula IF simple para la columna Acción.” Esto muestra confianza y habilidad de comunicación.",
+    tip2_t: "La velocidad es secundaria a la precisión", tip2_d: "Prefieren un resultado correcto en 90 segundos que uno rápido pero desordenado. Revisa una o dos celdas después de escribir una fórmula.",
+    tip3_t: "Usa las herramientas que mencionan", tip3_d: "Ten Google Sheets y Google Calendar ya abiertos e iniciados. Si piden Excel/Outlook, cambia con calma. Conocer ambos es una ventaja.",
+    tip4_t: "Flujo bilingüe", tip4_d: "Parte de la llamada será en español. Practica describir la misma acción en ambos idiomas: “I’m applying a filter” / “Estoy aplicando un filtro”.",
+    tip5_t: "Si te atoras", tip5_d: "Di: “Normalmente usaría XLOOKUP para esto. Déjame hacerlo con un método más simple que igual da el resultado correcto.” Luego entrega una respuesta correcta. Honestidad + solución que funciona es mejor que el silencio.",
+    formulas_title: "Fórmulas que Deberías Poder Escribir Rápido",
+    progress_title: "Tu Progreso", keep_going: "Sigue adelante – la consistencia vence a la intensidad",
+    keep_going_t: "Incluso 20 minutos enfocados al día en estas tareas exactas harán que la prueba de habilidades en vivo se sienta familiar en lugar de estresante."
+  }
+};
+
+function t(key) {
+  return i18n[state.lang][key] || i18n.en[key] || key;
+}
+
+function applyLang() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[state.lang][key]) el.textContent = i18n[state.lang][key];
+  });
+  document.getElementById('langToggle').textContent = state.lang === 'en' ? 'ES / EN' : 'EN / ES';
+}
+
+function toggleLang() {
+  state.lang = state.lang === 'en' ? 'es' : 'en';
+  applyLang();
+}
+
+// ========== NAVIGATION ==========
+function showPanel(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById('panel-' + id);
+  if (panel) panel.classList.add('active');
+  const btn = document.querySelector(`.nav-btn[data-panel="${id}"]`);
+  if (btn) btn.classList.add('active');
+
+  // start timer for exercises
+  if (['ex1','ex2','ex3','ex4','ex5','cal1','cal2','acct1','acct2','acct3','acct4','acct5'].includes(id)) {
+    if (!state.startTimes[id]) state.startTimes[id] = Date.now();
+    startTimer(id);
+  }
+  if (id === 'lab') {
+    // ensure sheet is rendered
+    setTimeout(() => { renderLab(); selectLabCell(labSelected || 'A1'); }, 50);
+  }
+  updateProgressUI();
+}
+
+// ========== TIMERS ==========
+const timerIntervals = {};
+function startTimer(id) {
+  const el = document.getElementById('timer-' + id);
+  if (!el) return;
+  if (timerIntervals[id]) clearInterval(timerIntervals[id]);
+  timerIntervals[id] = setInterval(() => {
+    const elapsed = Math.floor((Date.now() - state.startTimes[id]) / 1000);
+    const m = String(Math.floor(elapsed / 60)).padStart(2, '0');
+    const s = String(elapsed % 60).padStart(2, '0');
+    el.textContent = m + ':' + s;
+  }, 1000);
+}
+
+// ========== DATA ==========
+const today = new Date();
+function fmtDate(d) {
+  return d.toISOString().slice(0, 10);
+}
+function addDays(n) {
+  const d = new Date(today);
+  d.setDate(d.getDate() + n);
+  return fmtDate(d);
+}
+
+// Exercise 1 data
+const data1 = [
+  { client: "Martinez Family", year: 2025, doc: "W-2", received: addDays(-12), status: "Received", follow: addDays(-5), notes: "Complete" },
+  { client: "Lopez LLC", year: 2025, doc: "1099", received: "", status: "Pending", follow: addDays(-2), notes: "Waiting on client" },
+  { client: "Garcia & Sons", year: 2025, doc: "K-1", received: addDays(-8), status: "Reviewed", follow: addDays(3), notes: "Ready for prep" },
+  { client: "Rivera Consulting", year: 2025, doc: "Organizer", received: "", status: "Pending", follow: addDays(-1), notes: "Sent 2 reminders" },
+  { client: "Torres Holdings", year: 2025, doc: "W-2", received: addDays(-3), status: "Received", follow: addDays(5), notes: "" },
+  { client: "Santos Group", year: 2025, doc: "1099", received: "", status: "Pending", follow: addDays(1), notes: "First request sent" },
+  { client: "Nguyen Family", year: 2025, doc: "K-1", received: addDays(-15), status: "Filed", follow: addDays(-10), notes: "E-filed" }
+];
+
+function renderEx1() {
+  const tbody = document.getElementById('tbody1');
+  tbody.innerHTML = data1.map((r, i) => `
+    <tr>
+      <td>${r.client}</td>
+      <td>${r.year}</td>
+      <td>${r.doc}</td>
+      <td>${r.received || '—'}</td>
+      <td><select data-i="${i}" data-f="status" onchange="updateData1(this)">
+        <option value="Pending" ${r.status==='Pending'?'selected':''}>Pending</option>
+        <option value="Received" ${r.status==='Received'?'selected':''}>Received</option>
+        <option value="Reviewed" ${r.status==='Reviewed'?'selected':''}>Reviewed</option>
+        <option value="Filed" ${r.status==='Filed'?'selected':''}>Filed</option>
+      </select></td>
+      <td>${r.follow}</td>
+      <td>${r.notes}</td>
+      <td><input type="text" data-i="${i}" data-f="action" placeholder="=IF(...)" onchange="updateData1(this)" value="${r.action||''}"></td>
+    </tr>
+  `).join('');
+}
+function updateData1(el) {
+  const i = +el.dataset.i;
+  data1[i][el.dataset.f] = el.value;
+}
+function resetEx1() {
+  data1.forEach(r => delete r.action);
+  renderEx1();
+  hideFb('ex1');
+}
+function checkEx1() {
+  let score = 0;
+  let msgs = [];
+  // Check Action formulas conceptually
+  const pending = data1.filter(r => r.status === 'Pending');
+  const actionsCorrect = data1.every(r => {
+    const expected = r.status === 'Pending' ? 'Follow up' : '';
+    return (r.action || '').toLowerCase().includes(expected.toLowerCase()) || 
+           (r.action || '').toLowerCase().includes('if') ||
+           (expected === '' && !(r.action || '').toLowerCase().includes('follow'));
+  });
+  if (actionsCorrect || data1.some(r => (r.action||'').toLowerCase().includes('if'))) {
+    score += 40;
+    msgs.push('✓ Action column logic looks good (IF / Follow up for Pending).');
+  } else {
+    msgs.push('✗ Fill the Action column: use a formula idea like =IF(Status="Pending","Follow up","")');
+  }
+  // Overdue awareness
+  const overduePending = data1.filter(r => r.status === 'Pending' && r.follow < fmtDate(today));
+  if (overduePending.length > 0) {
+    score += 30;
+    msgs.push(`✓ You should notice ${overduePending.length} Pending item(s) with past follow-up dates (visual cue / priority).`);
+  }
+  // Sorting awareness
+  score += 30;
+  msgs.push('✓ In the real tool: Sort by Status (Pending first) then by Follow-up Date ascending. Use the Filter arrows.');
+  
+  showFb('ex1', score >= 70, msgs.join('<br>'), score);
+  markComplete('ex1', score);
+}
+
+// Exercise 2
+const data2 = [
+  { client: "Martinez Family", inv: "INV-1042", amount: 450, sent: addDays(-25), due: addDays(-10), status: "Open", last: addDays(-5) },
+  { client: "Lopez LLC", inv: "INV-1048", amount: 1200, sent: addDays(-18), due: addDays(-3), status: "Open", last: addDays(-2) },
+  { client: "Garcia & Sons", inv: "INV-1039", amount: 875, sent: addDays(-40), due: addDays(-20), status: "Paid", last: addDays(-15) },
+  { client: "Rivera Consulting", inv: "INV-1051", amount: 320, sent: addDays(-8), due: addDays(5), status: "Open", last: "" },
+  { client: "Torres Holdings", inv: "INV-1045", amount: 680, sent: addDays(-30), due: addDays(-12), status: "Open", last: addDays(-8) }
+];
+
+function renderEx2() {
+  const tbody = document.getElementById('tbody2');
+  tbody.innerHTML = data2.map((r, i) => {
+    const due = new Date(r.due);
+    const days = Math.floor((today - due) / 86400000);
+    return `<tr>
+      <td>${r.client}</td>
+      <td>${r.inv}</td>
+      <td>${r.amount}</td>
+      <td>${r.sent}</td>
+      <td>${r.due}</td>
+      <td>${r.status}</td>
+      <td><input type="text" data-i="${i}" placeholder="days" value="${r.days || ''}" onchange="data2[${i}].days=this.value"></td>
+      <td>${r.last || '—'}</td>
+    </tr>`;
+  }).join('');
+}
+function resetEx2() {
+  data2.forEach(r => delete r.days);
+  document.getElementById('sumOpen').value = '';
+  document.getElementById('sumOverdue').value = '';
+  renderEx2();
+  hideFb('ex2');
+}
+function checkEx2() {
+  let score = 0;
+  let msgs = [];
+  // Expected open = 450+1200+320+680 = 2650
+  // Overdue (due in past and Open): 450+1200+680 = 2330
+  const openVal = parseFloat(document.getElementById('sumOpen').value.replace(/[^0-9.]/g,'')) || 0;
+  const odVal = parseFloat(document.getElementById('sumOverdue').value.replace(/[^0-9.]/g,'')) || 0;
+  if (Math.abs(openVal - 2650) < 50) { score += 35; msgs.push('✓ Total Open Amount is correct (~$2,650).'); }
+  else msgs.push('✗ Total Open should be the sum of all Status=Open amounts (450+1200+320+680).');
+  if (Math.abs(odVal - 2330) < 50) { score += 35; msgs.push('✓ Total Overdue Amount is correct (~$2,330).'); }
+  else msgs.push('✗ Overdue = Open invoices whose Due Date is already past.');
+  // Days column
+  const hasDays = data2.some(r => r.days !== undefined && r.days !== '');
+  if (hasDays) { score += 30; msgs.push('✓ Days Overdue column has values (formula idea: =TODAY()-DueDate).'); }
+  else msgs.push('✗ Fill the Days Overdue column for at least a few rows.');
+  showFb('ex2', score >= 60, msgs.join('<br>'), score);
+  markComplete('ex2', score);
+}
+
+// Exercise 3
+const missing = [
+  { name: "Lopez LLC", doc: "2025 Organizer" },
+  { name: "Rivera Consulting", doc: "K-1" },
+  { name: "Martinez Family", doc: "Additional W-2" },
+  { name: "Torres Holdings", doc: "1099-NEC" }
+];
+const masterMap = {
+  "Martinez Family": { email: "martinez.tax@email.com", phone: "305-555-0142" },
+  "Lopez LLC": { email: "admin@lopezllc.com", phone: "786-555-0198" },
+  "Garcia & Sons": { email: "info@garciasons.com", phone: "954-555-0110" },
+  "Rivera Consulting": { email: "billing@riveraconsult.com", phone: "305-555-0177" },
+  "Torres Holdings": { email: "finance@torresh.com", phone: "561-555-0133" }
+};
+function renderEx3() {
+  const tbody = document.getElementById('tbody3');
+  tbody.innerHTML = missing.map((r, i) => `
+    <tr>
+      <td>${r.name}</td>
+      <td>${r.doc}</td>
+      <td><input type="text" data-i="${i}" data-f="email" placeholder="email from master" value="${r.email||''}" onchange="missing[${i}].email=this.value"></td>
+      <td><input type="text" data-i="${i}" data-f="phone" placeholder="phone from master" value="${r.phone||''}" onchange="missing[${i}].phone=this.value"></td>
+    </tr>
+  `).join('');
+}
+function resetEx3() {
+  missing.forEach(r => { delete r.email; delete r.phone; });
+  renderEx3();
+  hideFb('ex3');
+}
+function checkEx3() {
+  let correct = 0;
+  missing.forEach(r => {
+    const m = masterMap[r.name];
+    if (m && r.email === m.email && r.phone === m.phone) correct++;
+  });
+  const score = Math.round((correct / missing.length) * 100);
+  const msgs = correct === missing.length
+    ? ['✓ All emails and phones matched correctly.', 'In real Sheets you would use: =XLOOKUP(A2, Master!B:B, Master!C:C) or VLOOKUP / INDEX+MATCH.']
+    : [`Matched ${correct} of ${missing.length} correctly.`, 'Double-check the Client Master table and copy exact values (or write the proper lookup formula).'];
+  showFb('ex3', score >= 75, msgs.join('<br>'), score);
+  markComplete('ex3', score);
+}
+
+// Exercise 4
+const dirty = [
+  { rawName: "  martinez FAMILY ", rawDate: "03/15/2025", rawDoc: "w2" },
+  { rawName: "LOPEZ llc", rawDate: "15-Mar-2025", rawDoc: "1099-NEC " },
+  { rawName: "garcia & sons  ", rawDate: "2025/03/18", rawDoc: "K1" },
+  { rawName: "Rivera  Consulting", rawDate: "March 20, 2025", rawDoc: " organizer" },
+  { rawName: "TORRES holdings", rawDate: "03.22.25", rawDoc: "W-2 form" }
+];
+function renderEx4() {
+  const tbody = document.getElementById('tbody4');
+  tbody.innerHTML = dirty.map((r, i) => `
+    <tr>
+      <td style="color:#888">${r.rawName}</td>
+      <td style="color:#888">${r.rawDate}</td>
+      <td style="color:#888">${r.rawDoc}</td>
+      <td><input type="text" value="${r.cleanName||''}" onchange="dirty[${i}].cleanName=this.value" placeholder="Proper Case"></td>
+      <td><input type="text" value="${r.cleanDate||''}" onchange="dirty[${i}].cleanDate=this.value" placeholder="YYYY-MM-DD"></td>
+      <td><input type="text" value="${r.cleanDoc||''}" onchange="dirty[${i}].cleanDoc=this.value" placeholder="W-2 / 1099 / K-1..."></td>
+    </tr>
+  `).join('');
+}
+function resetEx4() {
+  dirty.forEach(r => { delete r.cleanName; delete r.cleanDate; delete r.cleanDoc; });
+  renderEx4();
+  hideFb('ex4');
+}
+function checkEx4() {
+  const expected = [
+    { name: "Martinez Family", date: "2025-03-15", doc: "W-2" },
+    { name: "Lopez Llc", date: "2025-03-15", doc: "1099" }, // PROPER gives Llc
+    { name: "Garcia & Sons", date: "2025-03-18", doc: "K-1" },
+    { name: "Rivera Consulting", date: "2025-03-20", doc: "Organizer" },
+    { name: "Torres Holdings", date: "2025-03-22", doc: "W-2" }
+  ];
+  let score = 0;
+  let msgs = [];
+  // Name check (flexible)
+  let nameOk = 0;
+  dirty.forEach((r, i) => {
+    const cn = (r.cleanName || '').trim().toLowerCase();
+    const exp = expected[i].name.toLowerCase();
+    if (cn.includes(exp.split(' ')[0]) && cn.length > 5) nameOk++;
+  });
+  if (nameOk >= 4) { score += 40; msgs.push('✓ Names cleaned to Proper Case / no extra spaces.'); }
+  else msgs.push('✗ Clean names with TRIM + PROPER (or equivalent).');
+  // Date
+  let dateOk = dirty.filter(r => /^\d{4}-\d{2}-\d{2}$/.test((r.cleanDate||'').trim())).length;
+  if (dateOk >= 3) { score += 30; msgs.push('✓ Most dates converted to YYYY-MM-DD.'); }
+  else msgs.push('✗ Convert dates to a consistent YYYY-MM-DD format.');
+  // Doc
+  let docOk = dirty.filter(r => {
+    const d = (r.cleanDoc||'').toUpperCase();
+    return d.includes('W-2') || d.includes('1099') || d.includes('K-1') || d.includes('ORGANIZER');
+  }).length;
+  if (docOk >= 4) { score += 30; msgs.push('✓ Document types standardized.'); }
+  else msgs.push('✗ Standardize document types (W-2, 1099, K-1, Organizer).');
+  showFb('ex4', score >= 60, msgs.join('<br>') + '<br><br>Useful functions: =TRIM(), =PROPER(), =TEXT(date,"YYYY-MM-DD"), Find & Replace.', score);
+  markComplete('ex4', score);
+}
+
+// Exercise 5
+const steps = [
+  { step: "Send engagement letter", status: "Done" },
+  { step: "Collect signature", status: "Done" },
+  { step: "Create client portal access", status: "Done" },
+  { step: "Send tax organizer", status: "Pending" },
+  { step: "Receive completed organizer", status: "Pending" },
+  { step: "Request missing documents", status: "Pending" }
+];
+function renderEx5() {
+  const tbody = document.getElementById('tbody5');
+  tbody.innerHTML = steps.map((r, i) => `
+    <tr>
+      <td>${r.step}</td>
+      <td>
+        <select onchange="steps[${i}].status=this.value">
+          <option value="Done" ${r.status==='Done'?'selected':''}>Done</option>
+          <option value="Pending" ${r.status==='Pending'?'selected':''}>Pending</option>
+        </select>
+      </td>
+      <td>${r.status === 'Done' ? '✓' : '—'}</td>
+    </tr>
+  `).join('');
+}
+function resetEx5() {
+  steps[0].status = 'Done'; steps[1].status = 'Done'; steps[2].status = 'Done';
+  steps[3].status = 'Pending'; steps[4].status = 'Pending'; steps[5].status = 'Pending';
+  document.getElementById('pctComplete').value = '';
+  document.getElementById('nextAction').value = '';
+  renderEx5();
+  hideFb('ex5');
+}
+function checkEx5() {
+  const done = steps.filter(s => s.status === 'Done').length;
+  const pct = Math.round((done / steps.length) * 100);
+  const userPct = parseInt(document.getElementById('pctComplete').value) || 0;
+  const next = (document.getElementById('nextAction').value || '').toLowerCase();
+  let score = 0;
+  let msgs = [];
+  if (Math.abs(userPct - pct) <= 10) { score += 50; msgs.push(`✓ Completion % is correct (~${pct}%).`); }
+  else msgs.push(`✗ Count Done steps / total. Currently ${done} of ${steps.length} = ${pct}%.`);
+  if (next.includes('organizer') || next.includes('send') || next.includes('document') || next.includes('request')) {
+    score += 50; msgs.push('✓ Next action correctly points to the next Pending step.');
+  } else msgs.push('✗ Next action should refer to the first Pending step (send tax organizer).');
+  showFb('ex5', score >= 70, msgs.join('<br>'), score);
+  markComplete('ex5', score);
+}
+
+// Calendar
+function renderCalendar() {
+  const grid = document.getElementById('calGrid');
+  const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  let html = days.map(d => `<div class="cal-day-header">${d}</div>`).join('');
+  // Simple current week starting Sunday
+  const start = new Date(today);
+  start.setDate(start.getDate() - start.getDay());
+  for (let i = 0; i < 14; i++) {
+    const d = new Date(start);
+    d.setDate(start.getDate() + i);
+    const isToday = fmtDate(d) === fmtDate(today);
+    const dayEvents = state.events.filter(e => e.date === fmtDate(d));
+    html += `<div class="cal-day ${isToday ? 'today' : ''}">
+      <div class="day-num">${d.getDate()}</div>
+      ${dayEvents.map(e => `<div class="cal-event ${e.type}" title="${e.title}">${e.title.slice(0,18)}</div>`).join('')}
+    </div>`;
+  }
+  grid.innerHTML = html;
+}
+
+function saveEvent() {
+  const title = document.getElementById('evTitle').value.trim();
+  const date = document.getElementById('evDate').value;
+  const time = document.getElementById('evTime').value;
+  const reminder = document.getElementById('evReminder').value;
+  const desc = document.getElementById('evDesc').value.trim();
+  const type = document.getElementById('evType').value;
+  if (!title || !date) {
+    showFb('cal1', false, 'Title and Date are required.', 0);
+    return;
+  }
+  state.events.push({ title, date, time, reminder, desc, type });
+  renderCalendar();
+  let score = 40;
+  let msgs = ['✓ Event created and appears on the calendar.'];
+  if (title.toLowerCase().includes('martinez') || title.toLowerCase().includes('document') || title.toLowerCase().includes('call') || title.toLowerCase().includes('client')) {
+    score += 20; msgs.push('✓ Title is descriptive (client + purpose).');
+  }
+  if (reminder !== 'none') { score += 20; msgs.push('✓ Reminder set.'); }
+  if (desc.length > 15) { score += 20; msgs.push('✓ Description/agenda has useful detail.'); }
+  showFb('cal1', score >= 70, msgs.join('<br>'), score);
+  markComplete('cal1', score);
+  clearEventForm();
+}
+function clearEventForm() {
+  document.getElementById('evTitle').value = '';
+  document.getElementById('evDesc').value = '';
+  document.getElementById('evDate').value = addDays(1);
+}
+
+// Calendar 2 – existing events
+const existing = [
+  { id: 1, title: "Document Collection – Lopez LLC", date: addDays(2), time: "14:00", notes: "Bilingual call, need 1099 and organizer" },
+  { id: 2, title: "Internal – Weekly Admin Sync", date: addDays(1), time: "09:30", notes: "Status of pending client docs" }
+];
+let editingId = null;
+function renderExisting() {
+  const el = document.getElementById('existingEvents');
+  el.innerHTML = existing.map(e => `
+    <div class="card" style="margin-bottom:0.5rem; cursor:pointer; padding:0.8rem 1rem;" onclick="startEdit(${e.id})">
+      <strong>${e.title}</strong><br>
+      <span class="text-muted">${e.date} at ${e.time} ET</span><br>
+      <small>${e.notes}</small>
+    </div>
+  `).join('');
+}
+function startEdit(id) {
+  editingId = id;
+  const e = existing.find(x => x.id === id);
+  document.getElementById('editTitle').value = e.title;
+  document.getElementById('editDate').value = e.date;
+  document.getElementById('editTime').value = e.time;
+  document.getElementById('editNotes').value = e.notes;
+  document.getElementById('editPanel').style.display = 'block';
+}
+function cancelEdit() {
+  editingId = null;
+  document.getElementById('editPanel').style.display = 'none';
+}
+function applyReschedule() {
+  if (!editingId) return;
+  const e = existing.find(x => x.id === editingId);
+  e.title = document.getElementById('editTitle').value;
+  e.date = document.getElementById('editDate').value;
+  e.time = document.getElementById('editTime').value;
+  e.notes = document.getElementById('editNotes').value;
+  renderExisting();
+  cancelEdit();
+  showFb('cal2', true, '✓ Event updated. In a real calendar you would also notify attendees and keep the reminder.', 90);
+  markComplete('cal2', 90);
+}
+
+// Mixed challenge
+function startMixedChallenge() {
+  if (state.mixedRunning) return;
+  state.mixedRunning = true;
+  document.getElementById('mixedWorkspace').classList.remove('hidden');
+  document.getElementById('startChallengeBtn').disabled = true;
+  let secs = 8 * 60;
+  const el = document.getElementById('mixedTimer');
+  state.mixedInterval = setInterval(() => {
+    secs--;
+    const m = String(Math.floor(secs / 60)).padStart(2, '0');
+    const s = String(secs % 60).padStart(2, '0');
+    el.textContent = m + ':' + s;
+    if (secs <= 0) {
+      clearInterval(state.mixedInterval);
+      finishMixed(true);
+    }
+  }, 1000);
+  showPanel('ex1'); // nudge user to start with tracker
+}
+function finishMixed(auto = false) {
+  if (state.mixedInterval) clearInterval(state.mixedInterval);
+  state.mixedRunning = false;
+  document.getElementById('startChallengeBtn').disabled = false;
+  const note = (document.getElementById('statusNote').value || '').trim();
+  let score = 40;
+  let msgs = [];
+  if (note.length > 20) { score += 30; msgs.push('✓ Status note is present and reasonably detailed.'); }
+  else msgs.push('✗ Write a clear one-sentence status note.');
+  if (state.events.length > 0) { score += 30; msgs.push('✓ At least one calendar event was created during practice.'); }
+  else msgs.push('✗ Create the appointment mentioned in the challenge.');
+  showFb('mixed', score >= 60, (auto ? 'Time is up. ' : '') + msgs.join('<br>'), score);
+  markComplete('mixed', score);
+}
+
+// Feedback helpers
+function showFb(id, ok, html, score) {
+  const el = document.getElementById('fb-' + id);
+  el.className = 'feedback show ' + (ok ? 'success' : 'error');
+  el.innerHTML = html + (score !== undefined ? `<br><strong>Score: ${score}/100</strong>` : '');
+}
+function hideFb(id) {
+  const el = document.getElementById('fb-' + id);
+  if (el) { el.className = 'feedback'; el.innerHTML = ''; }
+}
+
+function showSolution(ex) {
+  const solutions = {
+    ex1: `Formula idea for Action column:<br><code>=IF(E2="Pending","Follow up","")</code><br><br>
+          Then sort: click the Status column filter → sort A to Z or custom so Pending is first.<br>
+          Conditional formatting: select Follow-up column → Format → Conditional formatting → if date is before today → red fill.`,
+    ex2: `Days Overdue formula: <code>=TODAY()-E2</code> (where E is Due Date).<br>
+          Total Open: <code>=SUMIF(F:F,"Open",C:C)</code><br>
+          Total Overdue: sum of Amount where Status=Open AND Days Overdue > 0.`,
+    ex3: `Google Sheets / modern Excel:<br><code>=XLOOKUP(A2, Master!B:B, Master!C:C, "Not found")</code><br>
+          Classic: <code>=VLOOKUP(A2, Master!B:D, 2, FALSE)</code><br>
+          Or INDEX + MATCH: <code>=INDEX(Master!C:C, MATCH(A2, Master!B:B, 0))</code>`,
+    ex4: `Useful combination:<br>
+          Name: <code>=PROPER(TRIM(A2))</code><br>
+          Date: convert with DATEVALUE or manual entry to YYYY-MM-DD, or <code>=TEXT(DATEVALUE(B2),"YYYY-MM-DD")</code> when possible.<br>
+          Document: use Find & Replace or a nested IF / SWITCH to standardize.`
+  };
+  showFb(ex, true, solutions[ex] || 'See the Tips panel for formula references.', null);
+}
+
+// Progress
+function markComplete(id, score) {
+  state.completed.add(id);
+  state.scores[id] = score;
+  updateProgressUI();
+  // badge
+  const badge = document.getElementById('badge-' + id);
+  if (badge) {
+    badge.textContent = '✓';
+    badge.style.background = 'var(--accent)';
+  }
+}
+function updateProgressUI() {
+  const total = 12; // core exercises (sheets + calendar + accounting)
+  const done = state.completed.size;
+  const pct = Math.round((done / total) * 100);
+  document.getElementById('overallProgress').textContent = pct + '% Complete';
+  document.getElementById('statCompleted').textContent = done;
+  const scores = Object.values(state.scores);
+  document.getElementById('statScore').textContent = scores.length ? Math.round(scores.reduce((a,b)=>a+b,0)/scores.length) : '—';
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${done} of ${total} core exercises completed`;
+
+  const list = document.getElementById('progressList');
+  const names = { ex1:'Client Tracker', ex2:'Invoices', ex3:'Lookup', ex4:'Data Cleaning', ex5:'Dashboard', cal1:'Create Appt', cal2:'Reschedule', acct1:'Key Documents', acct2:'Deadlines', acct3:'Onboarding Flow', acct4:'Scenarios', acct5:'Core Terms', mixed:'Mixed Challenge' };
+  list.innerHTML = Object.keys(names).map(k => {
+    const done = state.completed.has(k);
+    const sc = state.scores[k];
+    return `<div style="padding:0.4rem 0; border-bottom:1px solid var(--border); display:flex; justify-content:space-between;">
+      <span>${done ? '✅' : '⬜'} ${names[k]}</span>
+      <span>${done ? sc + '/100' : '—'}</span>
+    </div>`;
+  }).join('');
+}
+
+function toggleCheck(el) {
+  el.classList.toggle('done');
+  el.textContent = el.classList.contains('done') ? '✓' : '';
+}
+
+// ========== LIVE SPREADSHEET ENGINE ==========
+const LAB_COLS = 10; // A–J
+const LAB_ROWS = 15;
+let labData = {};      // key "A1" -> { raw: string, value: any }
+let labSelected = 'A1';
+let labScenario = 'blank';
+
+function colLetter(n) { // 0 -> A
+  let s = '';
+  n++;
+  while (n > 0) {
+    n--;
+    s = String.fromCharCode(65 + (n % 26)) + s;
+    n = Math.floor(n / 26);
+  }
+  return s;
+}
+function cellKey(c, r) { return colLetter(c) + (r + 1); }
+
+function initLabSheet() {
+  const head = document.getElementById('labHead');
+  const body = document.getElementById('labBody');
+  let h = '<tr><th style="width:36px; background:#d0dce8;"></th>';
+  for (let c = 0; c < LAB_COLS; c++) h += `<th style="min-width:100px;">${colLetter(c)}</th>`;
+  h += '</tr>';
+  head.innerHTML = h;
+
+  let b = '';
+  for (let r = 0; r < LAB_ROWS; r++) {
+    b += `<tr><td style="background:#e8f0f8; font-weight:700; text-align:center; color:var(--primary);">${r+1}</td>`;
+    for (let c = 0; c < LAB_COLS; c++) {
+      const key = cellKey(c, r);
+      b += `<td id="lab-${key}" onclick="selectLabCell('${key}')" ondblclick="editLabCell('${key}')" style="cursor:cell; min-width:100px; height:28px;"></td>`;
+    }
+    b += '</tr>';
+  }
+  body.innerHTML = b;
+  renderLab();
+}
+
+function selectLabCell(key) {
+  // clear previous
+  document.querySelectorAll('#labSheet td').forEach(td => td.style.outline = '');
+  const td = document.getElementById('lab-' + key);
+  if (td) td.style.outline = '2px solid var(--primary)';
+  labSelected = key;
+  document.getElementById('labCellRef').textContent = key;
+  const cell = labData[key] || { raw: '', value: '' };
+  document.getElementById('labFormulaBar').value = cell.raw || '';
+  document.getElementById('labFormulaBar').focus();
+}
+
+function editLabCell(key) {
+  selectLabCell(key);
+  document.getElementById('labFormulaBar').focus();
+}
+
+function commitLabFormula() {
+  const raw = document.getElementById('labFormulaBar').value;
+  labData[labSelected] = { raw: raw, value: null };
+  evaluateAllLab();
+  // move to next row same column
+  const match = labSelected.match(/^([A-Z]+)(\d+)$/);
+  if (match) {
+    const next = match[1] + (parseInt(match[2]) + 1);
+    if (document.getElementById('lab-' + next)) selectLabCell(next);
+  }
+}
+
+function getCellValue(key) {
+  if (!labData[key]) return '';
+  if (labData[key].value !== null && labData[key].value !== undefined) return labData[key].value;
+  return labData[key].raw || '';
+}
+
+// Simple but capable formula evaluator
+function evaluateFormula(formula, selfKey) {
+  if (!formula || typeof formula !== 'string') return formula;
+  let f = formula.trim();
+  if (!f.startsWith('=')) return f;
+  f = f.slice(1).trim();
+
+  try {
+    // Replace TODAY()
+    f = f.replace(/TODAY\s*\(\s*\)/gi, () => {
+      const d = new Date();
+      return d.getTime(); // numeric for date math
+    });
+
+    // Replace cell references (A1, B2, etc.) – avoid replacing inside strings later
+    f = f.replace(/([A-Z]+)(\d+)/gi, (match, col, row) => {
+      if (match.toUpperCase() === selfKey) return '0'; // prevent circular
+      const val = getCellValue(match.toUpperCase());
+      if (val === '' || val === null || val === undefined) return '0';
+      if (typeof val === 'number') return val;
+      // try number
+      const num = parseFloat(String(val).replace(/[,$]/g, ''));
+      if (!isNaN(num) && String(val).trim() !== '') return num;
+      // return as quoted string
+      return JSON.stringify(String(val));
+    });
+
+    // Functions
+    // TRIM
+    f = f.replace(/TRIM\s*\(\s*([^)]+)\s*\)/gi, (_, arg) => {
+      try { return JSON.stringify(String(eval(arg)).trim()); } catch { return '""'; }
+    });
+    // PROPER
+    f = f.replace(/PROPER\s*\(\s*([^)]+)\s*\)/gi, (_, arg) => {
+      try {
+        const s = String(eval(arg));
+        return JSON.stringify(s.replace(/\w\S*/g, w => w.charAt(0).toUpperCase() + w.substr(1).toLowerCase()));
+      } catch { return '""'; }
+    });
+    // UPPER / LOWER
+    f = f.replace(/UPPER\s*\(\s*([^)]+)\s*\)/gi, (_, arg) => {
+      try { return JSON.stringify(String(eval(arg)).toUpperCase()); } catch { return '""'; }
+    });
+    f = f.replace(/LOWER\s*\(\s*([^)]+)\s*\)/gi, (_, arg) => {
+      try { return JSON.stringify(String(eval(arg)).toLowerCase()); } catch { return '""'; }
+    });
+    // LEN
+    f = f.replace(/LEN\s*\(\s*([^)]+)\s*\)/gi, (_, arg) => {
+      try { return String(eval(arg)).length; } catch { return 0; }
+    });
+
+    // IF(condition, trueVal, falseVal) – simple version
+    f = f.replace(/IF\s*\(\s*([^,]+)\s*,\s*([^,]+)\s*,\s*([^)]+)\s*\)/gi, (_, cond, tVal, fVal) => {
+      try {
+        const c = eval(cond);
+        return c ? tVal : fVal;
+      } catch { return fVal; }
+    });
+
+    // SUM(range)  e.g. SUM(C2:C8)
+    f = f.replace(/SUM\s*\(\s*([A-Z]+)(\d+)\s*:\s*([A-Z]+)(\d+)\s*\)/gi, (_, c1, r1, c2, r2) => {
+      let total = 0;
+      const startCol = c1.toUpperCase().charCodeAt(0) - 65;
+      const endCol = c2.toUpperCase().charCodeAt(0) - 65;
+      const startRow = parseInt(r1) - 1;
+      const endRow = parseInt(r2) - 1;
+      for (let r = Math.min(startRow, endRow); r <= Math.max(startRow, endRow); r++) {
+        for (let c = Math.min(startCol, endCol); c <= Math.max(startCol, endCol); c++) {
+          const v = getCellValue(cellKey(c, r));
+          const n = parseFloat(v);
+          if (!isNaN(n)) total += n;
+        }
+      }
+      return total;
+    });
+
+    // COUNTIF(range, criteria)
+    f = f.replace(/COUNTIF\s*\(\s*([A-Z]+)(\d+)\s*:\s*([A-Z]+)(\d+)\s*,\s*([^)]+)\s*\)/gi, (_, c1, r1, c2, r2, crit) => {
+      let count = 0;
+      let criteria = crit.trim();
+      if ((criteria.startsWith('"') && criteria.endsWith('"')) || (criteria.startsWith("'") && criteria.endsWith("'"))) {
+        criteria = criteria.slice(1, -1);
+      } else {
+        try { criteria = eval(criteria); } catch {}
+      }
+      const startCol = c1.toUpperCase().charCodeAt(0) - 65;
+      const endCol = c2.toUpperCase().charCodeAt(0) - 65;
+      const startRow = parseInt(r1) - 1;
+      const endRow = parseInt(r2) - 1;
+      for (let r = Math.min(startRow, endRow); r <= Math.max(startRow, endRow); r++) {
+        for (let c = Math.min(startCol, endCol); c <= Math.max(startCol, endCol); c++) {
+          const v = String(getCellValue(cellKey(c, r)));
+          if (v === String(criteria)) count++;
+        }
+      }
+      return count;
+    });
+
+    // SUMIF(range, criteria, sum_range)
+    f = f.replace(/SUMIF\s*\(\s*([A-Z]+)(\d+)\s*:\s*([A-Z]+)(\d+)\s*,\s*([^,]+)\s*,\s*([A-Z]+)(\d+)\s*:\s*([A-Z]+)(\d+)\s*\)/gi,
+      (_, c1, r1, c2, r2, crit, sc1, sr1, sc2, sr2) => {
+        let total = 0;
+        let criteria = crit.trim();
+        if ((criteria.startsWith('"') && criteria.endsWith('"')) || (criteria.startsWith("'") && criteria.endsWith("'"))) {
+          criteria = criteria.slice(1, -1);
+        }
+        const startCol = c1.toUpperCase().charCodeAt(0) - 65;
+        const endCol = c2.toUpperCase().charCodeAt(0) - 65;
+        const startRow = parseInt(r1) - 1;
+        const endRow = parseInt(r2) - 1;
+        const sumStartCol = sc1.toUpperCase().charCodeAt(0) - 65;
+        for (let r = Math.min(startRow, endRow); r <= Math.max(startRow, endRow); r++) {
+          for (let c = Math.min(startCol, endCol); c <= Math.max(startCol, endCol); c++) {
+            const v = String(getCellValue(cellKey(c, r)));
+            if (v === String(criteria)) {
+              const sumVal = parseFloat(getCellValue(cellKey(sumStartCol + (c - startCol), r)));
+              if (!isNaN(sumVal)) total += sumVal;
+            }
+          }
+        }
+        return total;
+      });
+
+    // Clean remaining quotes for final eval
+    // Final evaluation
+    let result = eval(f);
+    if (typeof result === 'string') {
+      // remove surrounding quotes if present from our replacements
+      if ((result.startsWith('"') && result.endsWith('"')) || (result.startsWith("'") && result.endsWith("'"))) {
+        result = result.slice(1, -1);
+      }
+    }
+    return result;
+  } catch (err) {
+    return '#ERROR!';
+  }
+}
+
+function evaluateAllLab() {
+  // First pass: non-formula values
+  Object.keys(labData).forEach(key => {
+    const raw = labData[key].raw;
+    if (!raw || !String(raw).startsWith('=')) {
+      labData[key].value = raw;
+    }
+  });
+  // Second pass: formulas (simple, no deep dependency resolution)
+  Object.keys(labData).forEach(key => {
+    const raw = labData[key].raw;
+    if (raw && String(raw).startsWith('=')) {
+      labData[key].value = evaluateFormula(raw, key);
+    }
+  });
+  renderLab();
+}
+
+function renderLab() {
+  for (let r = 0; r < LAB_ROWS; r++) {
+    for (let c = 0; c < LAB_COLS; c++) {
+      const key = cellKey(c, r);
+      const td = document.getElementById('lab-' + key);
+      if (!td) continue;
+      const cell = labData[key];
+      if (!cell) {
+        td.textContent = '';
+        td.title = '';
+        continue;
+      }
+      let display = cell.value;
+      if (display === null || display === undefined) display = cell.raw || '';
+      // Format dates that came from TODAY() math roughly
+      if (typeof display === 'number' && display > 1e12) {
+        // treat as timestamp
+        const d = new Date(display);
+        display = d.toISOString().slice(0, 10);
+      }
+      td.textContent = display;
+      td.title = cell.raw && cell.raw.startsWith('=') ? cell.raw : '';
+      if (cell.raw && cell.raw.startsWith('=')) {
+        td.style.fontStyle = 'normal';
+      }
+    }
+  }
+}
+
+function loadLabScenario(name) {
+  labData = {};
+  labScenario = name;
+  if (name === 'tracker') {
+    // Headers
+    const headers = ['Client Name', 'Tax Year', 'Document', 'Received', 'Status', 'Follow-up', 'Notes', 'Action'];
+    headers.forEach((h, i) => { labData[cellKey(i, 0)] = { raw: h, value: h }; });
+    const rows = [
+      ['Martinez Family', 2025, 'W-2', '2025-10-10', 'Received', '2025-10-17', 'Complete'],
+      ['Lopez LLC', 2025, '1099', '', 'Pending', '2025-10-20', 'Waiting on client'],
+      ['Garcia & Sons', 2025, 'K-1', '2025-10-14', 'Reviewed', '2025-10-25', 'Ready for prep'],
+      ['Rivera Consulting', 2025, 'Organizer', '', 'Pending', '2025-10-21', 'Sent 2 reminders'],
+      ['Torres Holdings', 2025, 'W-2', '2025-10-19', 'Received', '2025-10-27', ''],
+      ['Santos Group', 2025, '1099', '', 'Pending', '2025-10-23', 'First request sent'],
+      ['Nguyen Family', 2025, 'K-1', '2025-10-07', 'Filed', '2025-10-12', 'E-filed']
+    ];
+    rows.forEach((row, ri) => {
+      row.forEach((val, ci) => {
+        labData[cellKey(ci, ri + 1)] = { raw: String(val), value: val };
+      });
+    });
+    // Pre-fill a couple of example formulas as guidance (user can change)
+    labData['H2'] = { raw: '', value: '' };
+    showFb('lab', true, 'Client Document Tracker loaded. Try in column H (Action): <code>=IF(E2="Pending","Follow up","")</code> then copy the logic down. Also try <code>=COUNTIF(E2:E8,"Pending")</code> in a free cell.', null);
+  } else if (name === 'invoices') {
+    const headers = ['Client', 'Invoice #', 'Amount', 'Date Sent', 'Due Date', 'Status', 'Days Overdue', 'Last Contact'];
+    headers.forEach((h, i) => { labData[cellKey(i, 0)] = { raw: h, value: h }; });
+    const rows = [
+      ['Martinez Family', 'INV-1042', 450, '2025-09-27', '2025-10-12', 'Open', '', '2025-10-17'],
+      ['Lopez LLC', 'INV-1048', 1200, '2025-10-04', '2025-10-19', 'Open', '', '2025-10-20'],
+      ['Garcia & Sons', 'INV-1039', 875, '2025-09-12', '2025-10-02', 'Paid', '', '2025-10-07'],
+      ['Rivera Consulting', 'INV-1051', 320, '2025-10-14', '2025-10-27', 'Open', '', ''],
+      ['Torres Holdings', 'INV-1045', 680, '2025-09-22', '2025-10-10', 'Open', '', '2025-10-14']
+    ];
+    rows.forEach((row, ri) => {
+      row.forEach((val, ci) => {
+        labData[cellKey(ci, ri + 1)] = { raw: String(val), value: val };
+      });
+    });
+    showFb('lab', true, 'Invoice data loaded. In column G try: <code>=TODAY()-E2</code> (may show a large number – that is days). Then use <code>=SUMIF(F2:F6,"Open",C2:C6)</code> for total open amount.', null);
+  } else if (name === 'lookup') {
+    // Master
+    labData['A1'] = { raw: 'Client Name', value: 'Client Name' };
+    labData['B1'] = { raw: 'Email', value: 'Email' };
+    labData['C1'] = { raw: 'Phone', value: 'Phone' };
+    const master = [
+      ['Martinez Family', 'martinez.tax@email.com', '305-555-0142'],
+      ['Lopez LLC', 'admin@lopezllc.com', '786-555-0198'],
+      ['Garcia & Sons', 'info@garciasons.com', '954-555-0110'],
+      ['Rivera Consulting', 'billing@riveraconsult.com', '305-555-0177'],
+      ['Torres Holdings', 'finance@torresh.com', '561-555-0133']
+    ];
+    master.forEach((row, ri) => {
+      row.forEach((val, ci) => {
+        labData[cellKey(ci, ri + 1)] = { raw: val, value: val };
+      });
+    });
+    // Missing docs section
+    labData['E1'] = { raw: 'Missing Client', value: 'Missing Client' };
+    labData['F1'] = { raw: 'Missing Doc', value: 'Missing Doc' };
+    labData['G1'] = { raw: 'Email (manual or formula)', value: 'Email (manual or formula)' };
+    labData['E2'] = { raw: 'Lopez LLC', value: 'Lopez LLC' };
+    labData['F2'] = { raw: '2025 Organizer', value: '2025 Organizer' };
+    labData['E3'] = { raw: 'Rivera Consulting', value: 'Rivera Consulting' };
+    labData['F3'] = { raw: 'K-1', value: 'K-1' };
+    showFb('lab', true, 'Lookup practice loaded. Master list is in A:C. Missing clients in E:F. Manually look up or practice writing the logic you would use with XLOOKUP/VLOOKUP.', null);
+  } else {
+    showFb('lab', true, 'Blank sheet ready. Click any cell and start typing. Use the formula bar for longer formulas.', null);
+  }
+  evaluateAllLab();
+  selectLabCell('A1');
+}
+
+// ========== ACCOUNTING KNOWLEDGE EXERCISES ==========
+
+// Acct1 – Document Matching
+const docs = [
+  { id: 'w2', name: 'W-2', correct: 'Wage and tax statement from an employer showing wages and taxes withheld' },
+  { id: '1099', name: '1099 (e.g. 1099-NEC)', correct: 'Reports non-employee compensation or other income paid to independent contractors or others' },
+  { id: 'k1', name: 'Schedule K-1', correct: 'Reports a partner’s or S-corp shareholder’s share of income, deductions and credits' },
+  { id: 'organizer', name: 'Tax Organizer', correct: 'Questionnaire sent to the client to collect all information needed to prepare the return' },
+  { id: 'engagement', name: 'Engagement Letter', correct: 'Written agreement that defines the scope of work, fees and responsibilities between firm and client' },
+  { id: 'extension', name: 'Form 4868 (Extension)', correct: 'Request for additional time to file the tax return (does not extend time to pay tax owed)' }
+];
+const docDescriptions = docs.map(d => d.correct).sort(() => Math.random() - 0.5);
+
+function renderAcct1() {
+  const area = document.getElementById('docMatchArea');
+  area.innerHTML = docs.map((d, i) => `
+    <div style="display:grid; grid-template-columns:180px 1fr; gap:0.75rem; align-items:center; margin-bottom:0.7rem; padding-bottom:0.7rem; border-bottom:1px solid var(--border);">
+      <strong>${d.name}</strong>
+      <select id="docSel${i}" style="width:100%;">
+        <option value="">— Select description —</option>
+        ${docDescriptions.map(desc => `<option value="${desc}">${desc}</option>`).join('')}
+      </select>
+    </div>
+  `).join('');
+}
+function resetAcct1() { renderAcct1(); hideFb('acct1'); }
+function checkAcct1() {
+  let correct = 0;
+  docs.forEach((d, i) => {
+    const sel = document.getElementById('docSel' + i);
+    if (sel && sel.value === d.correct) correct++;
+  });
+  const score = Math.round((correct / docs.length) * 100);
+  showFb('acct1', score >= 80, `You matched ${correct} of ${docs.length} correctly.`, score);
+  markComplete('acct1', score);
+}
+
+// Acct2 – Deadlines Quiz
+const deadlineQs = [
+  { q: 'Typical due date for most individual (Form 1040) tax returns', options: ['January 31', 'April 15', 'June 15', 'October 15'], answer: 'April 15' },
+  { q: 'Typical extended due date for individual returns (after filing Form 4868)', options: ['June 15', 'September 15', 'October 15', 'December 31'], answer: 'October 15' },
+  { q: 'Deadline for employers to furnish W-2s to employees (most cases)', options: ['January 15', 'January 31', 'February 28', 'April 15'], answer: 'January 31' },
+  { q: 'Does filing an extension also give more time to pay any tax owed?', options: ['Yes, automatically', 'Yes, if you request it', 'No – payment is still due by the original deadline', 'Only for amounts under $1,000'], answer: 'No – payment is still due by the original deadline' },
+  { q: 'What does “e-file” mean in this context?', options: ['Emailing the return to the client', 'Electronically filing the return with the IRS/state', 'Scanning paper returns into the portal', 'Exporting data to Excel'], answer: 'Electronically filing the return with the IRS/state' }
+];
+function renderAcct2() {
+  const el = document.getElementById('deadlineQuiz');
+  el.innerHTML = deadlineQs.map((item, i) => `
+    <div style="margin-bottom:1.2rem;">
+      <p style="font-weight:600; margin-bottom:0.4rem;">${i+1}. ${item.q}</p>
+      ${item.options.map(opt => `
+        <label style="display:block; margin:0.25rem 0; cursor:pointer;">
+          <input type="radio" name="dl${i}" value="${opt}"> ${opt}
+        </label>
+      `).join('')}
+    </div>
+  `).join('');
+}
+function resetAcct2() { renderAcct2(); hideFb('acct2'); }
+function checkAcct2() {
+  let correct = 0;
+  deadlineQs.forEach((item, i) => {
+    const selected = document.querySelector(`input[name="dl${i}"]:checked`);
+    if (selected && selected.value === item.answer) correct++;
+  });
+  const score = Math.round((correct / deadlineQs.length) * 100);
+  showFb('acct2', score >= 80, `Correct: ${correct} / ${deadlineQs.length}`, score);
+  markComplete('acct2', score);
+}
+
+// Acct3 – Onboarding order
+const onboardSteps = [
+  { id: 1, text: 'Send engagement letter and collect signature' },
+  { id: 2, text: 'Set the client up in the client portal' },
+  { id: 3, text: 'Send tax organizer and document checklist' },
+  { id: 4, text: 'Follow up until all required documents are received' },
+  { id: 5, text: 'Organize and review documents (W-2s, 1099s, K-1s, etc.)' },
+  { id: 6, text: 'Prepare / support preparation of the return' },
+  { id: 7, text: 'Send completed return and signature forms; follow up until signed' },
+  { id: 8, text: 'E-file (or track filing status) and send invoice' }
+];
+let currentOrder = [...onboardSteps].sort(() => Math.random() - 0.5);
+
+function renderAcct3() {
+  const el = document.getElementById('onboardOrder');
+  el.innerHTML = currentOrder.map((s, idx) => `
+    <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:0.5rem; background:#f8fafc; padding:0.6rem 0.9rem; border-radius:8px;">
+      <select onchange="moveOnboard(${idx}, this.value)" style="width:60px;">
+        ${onboardSteps.map((_, i) => `<option value="${i+1}" ${i+1 === idx+1 ? 'selected' : ''}>${i+1}</option>`).join('')}
+      </select>
+      <span>${s.text}</span>
+    </div>
+  `).join('');
+}
+function moveOnboard(fromIdx, newPos) {
+  // Simple re-order by selected position (basic implementation)
+  const item = currentOrder.splice(fromIdx, 1)[0];
+  currentOrder.splice(newPos - 1, 0, item);
+  renderAcct3();
+}
+function resetAcct3() {
+  currentOrder = [...onboardSteps].sort(() => Math.random() - 0.5);
+  renderAcct3();
+  hideFb('acct3');
+}
+function checkAcct3() {
+  // Check if the displayed order matches the correct sequence by text
+  let correct = 0;
+  const displayed = Array.from(document.querySelectorAll('#onboardOrder span')).map(s => s.textContent.trim());
+  onboardSteps.forEach((step, i) => {
+    if (displayed[i] === step.text) correct++;
+  });
+  const score = Math.round((correct / onboardSteps.length) * 100);
+  const msg = score === 100
+    ? 'Perfect order! This is the logical flow used in most small tax/accounting firms.'
+    : `You have ${correct} of ${onboardSteps.length} steps in the correct position. Ideal sequence: Engagement → Portal → Organizer → Follow-up docs → Review → Prepare → Signature & e-file → Invoice.`;
+  showFb('acct3', score >= 75, msg, score);
+  markComplete('acct3', score);
+}
+
+// Acct4 – Scenarios
+const scenarios = [
+  {
+    q: 'A client emails that they received a letter from the IRS. What is the best first action?',
+    options: [
+      'Tell them to ignore it if they already filed',
+      'Log the letter, ask them to upload or forward it, and notify the right team member',
+      'Immediately call the IRS on their behalf',
+      'Ask them to wait until tax season is over'
+    ],
+    answer: 1
+  },
+  {
+    q: 'A client has not returned the signed engagement letter after two reminders. What should you do?',
+    options: [
+      'Start preparing the return anyway',
+      'Escalate politely to the Administration Department Head or Senior Assistant and document the follow-ups',
+      'Delete the client from the system',
+      'Send the tax organizer without the engagement letter'
+    ],
+    answer: 1
+  },
+  {
+    q: 'It is March 20 and a client still has not sent their W-2s and organizer. What is the priority?',
+    options: [
+      'Wait until April 10 to follow up',
+      'Send a clear, friendly follow-up, note the approaching deadline, and offer help using the portal',
+      'File an extension automatically without telling the client',
+      'Close the client file'
+    ],
+    answer: 1
+  },
+  {
+    q: 'A client asks you in Spanish for an explanation of a large refund they received. You are not a tax preparer. Best response?',
+    options: [
+      'Give your best personal interpretation of the numbers',
+      'Explain that you will have the Senior Assistant or preparer call them back, and schedule it if needed',
+      'Tell them refunds are always correct',
+      'Ignore the language and answer only in English'
+    ],
+    answer: 1
+  },
+  {
+    q: 'You notice a client uploaded a document to the wrong year folder in the portal. What do you do?',
+    options: [
+      'Leave it – the preparer will find it',
+      'Move or flag it correctly, and send a short note so the file stays organized and confidential',
+      'Delete the document',
+      'Ask the client to re-upload everything'
+    ],
+    answer: 1
+  }
+];
+function renderAcct4() {
+  const el = document.getElementById('scenarioArea');
+  el.innerHTML = scenarios.map((s, i) => `
+    <div style="margin-bottom:1.4rem; padding-bottom:1rem; border-bottom:1px solid var(--border);">
+      <p style="font-weight:600; margin-bottom:0.5rem;">${i+1}. ${s.q}</p>
+      ${s.options.map((opt, j) => `
+        <label style="display:block; margin:0.3rem 0; cursor:pointer; font-size:0.92rem;">
+          <input type="radio" name="sc${i}" value="${j}"> ${opt}
+        </label>
+      `).join('')}
+    </div>
+  `).join('');
+}
+function resetAcct4() { renderAcct4(); hideFb('acct4'); }
+function checkAcct4() {
+  let correct = 0;
+  scenarios.forEach((s, i) => {
+    const selected = document.querySelector(`input[name="sc${i}"]:checked`);
+    if (selected && parseInt(selected.value) === s.answer) correct++;
+  });
+  const score = Math.round((correct / scenarios.length) * 100);
+  showFb('acct4', score >= 80, `Correct professional responses: ${correct} / ${scenarios.length}. These scenarios test judgment, documentation, escalation, and staying within your role.`, score);
+  markComplete('acct4', score);
+}
+
+// Acct5 – Core Terms
+const terms = [
+  { term: 'Monthly Close', def: 'The process of finalizing the books for a given month (recording adjustments, reconciling accounts, producing reports)' },
+  { term: 'Accounts Receivable', def: 'Money owed to the firm or business by clients/customers for services or goods already provided' },
+  { term: 'Reconciliation', def: 'Comparing two sets of records (e.g. bank statement vs books) to ensure they match and differences are explained' },
+  { term: 'Tax Season', def: 'The high-volume period (roughly January–April) when most individual and many business returns are prepared and filed' },
+  { term: 'Client Portal', def: 'Secure online system where clients upload documents, sign forms, and communicate with the firm' },
+  { term: 'Debit vs Credit (basic)', def: 'The two sides of every accounting entry; debits and credits must always balance in double-entry bookkeeping' }
+];
+const termDefs = terms.map(t => t.def).sort(() => Math.random() - 0.5);
+
+function renderAcct5() {
+  const el = document.getElementById('termsQuiz');
+  el.innerHTML = terms.map((t, i) => `
+    <div style="display:grid; grid-template-columns:160px 1fr; gap:0.75rem; align-items:center; margin-bottom:0.7rem;">
+      <strong>${t.term}</strong>
+      <select id="termSel${i}">
+        <option value="">— Select definition —</option>
+        ${termDefs.map(d => `<option value="${d}">${d}</option>`).join('')}
+      </select>
+    </div>
+  `).join('');
+}
+function resetAcct5() { renderAcct5(); hideFb('acct5'); }
+function checkAcct5() {
+  let correct = 0;
+  terms.forEach((t, i) => {
+    const sel = document.getElementById('termSel' + i);
+    if (sel && sel.value === t.def) correct++;
+  });
+  const score = Math.round((correct / terms.length) * 100);
+  showFb('acct5', score >= 80, `Matched ${correct} of ${terms.length} terms correctly.`, score);
+  markComplete('acct5', score);
+}
+
+// Init
+document.getElementById('evDate').value = addDays(1);
+renderEx1();
+renderEx2();
+renderEx3();
+renderEx4();
+renderEx5();
+renderCalendar();
+renderExisting();
+renderAcct1();
+renderAcct2();
+renderAcct3();
+renderAcct4();
+renderAcct5();
+initLabSheet();
+loadLabScenario('tracker');
+applyLang();
+updateProgressUI();
+
+// Persist simple progress in localStorage
+try {
+  const saved = localStorage.getItem('agosfl_trainer');
+  if (saved) {
+    const s = JSON.parse(saved);
+    if (s.completed) s.completed.forEach(c => state.completed.add(c));
+    if (s.scores) state.scores = s.scores;
+    updateProgressUI();
+  }
+} catch(e) {}
+setInterval(() => {
+  try {
+    localStorage.setItem('agosfl_trainer', JSON.stringify({
+      completed: [...state.completed],
+      scores: state.scores
+    }));
+  } catch(e) {}
+}, 5000);
+</script>
+</body>
+</html>
